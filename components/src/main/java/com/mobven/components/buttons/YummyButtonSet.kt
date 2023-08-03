@@ -41,9 +41,9 @@ fun YummyButton(
     Box(
         contentAlignment = Alignment.Center,
         modifier = modifier
-            .clickable { onClick() }
             .sizeIn(86.dp, 44.dp)
             .clip(RoundedCornerShape(24.dp))
+            .clickable { onClick() }
             .background(if (isEnabled) Color(0xFFF87146) else Color(0xFFE3E9ED))
     ) {
         Text(
@@ -158,9 +158,9 @@ private fun DetailedYummyButton(
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.SpaceBetween,
         modifier = modifier
-            .clickable { onClick() }
             .fillMaxWidth()
             .clip(RoundedCornerShape(24.dp))
+            .clickable { onClick() }
             .background(Color(0xFFF87146))
             .padding(4.dp)
     ) {
@@ -180,9 +180,9 @@ fun CheckoutYummyButton(
     Row(
         verticalAlignment = Alignment.CenterVertically,
         modifier = modifier
-            .clickable { onClick() }
             .fillMaxWidth()
             .clip(RoundedCornerShape(24.dp))
+            .clickable { onClick() }
             .background(Color(0xFFF87146))
             .padding(start = 4.dp, top = 4.dp, bottom = 4.dp, end = 12.dp)
     ) {
