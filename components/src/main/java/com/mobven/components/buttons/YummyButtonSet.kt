@@ -148,7 +148,7 @@ private fun YummyButtonMiddleContent(
 }
 
 @Composable
-private fun DetailedYummyButton(
+fun DetailedYummyButton(
     size: Int,
     content: List<YummyButtonContent>,
     modifier: Modifier = Modifier,
