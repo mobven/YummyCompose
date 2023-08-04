@@ -19,8 +19,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.layout.Layout
-import androidx.compose.ui.layout.layoutId
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
@@ -59,47 +57,34 @@ private fun YummyButtonContentItem(
     model: YummyButtonContent,
     modifier: Modifier = Modifier,
 ) {
-    Layout(
-        content = {
-            AsyncImage(
-                model = model.imgUrl ?: model.imgRes,
-                contentDescription = null,
-                placeholder = painterResource(id = R.drawable.dummy_hamburger),
-                modifier = modifier
-                    .layoutId(MIDDLE_CONTENT_IMAGE)
-                    .size(40.dp)
-                    .clip(CircleShape),
-                contentScale = ContentScale.Crop
-            )
-            if (model.contentSize != null) {
-                Box(
-                    contentAlignment = Alignment.Center,
-                    modifier = Modifier
-                        .layoutId(MIDDLE_CONTENT_SIZE)
-                        .size(14.dp)
-                        .clip(CircleShape)
-                        .background(Color.White)
-                ) {
-                    Text(
-                        text = model.contentSize.toString(),
-                        fontWeight = FontWeight.Bold,
-                        fontSize = 10.sp,
-                        lineHeight = 16.sp,
-                    )
-                }
+    Box(
+        contentAlignment = Alignment.Center
+    ) {
+        AsyncImage(
+            model = model.imgUrl ?: model.imgRes,
+            contentDescription = null,
+            placeholder = painterResource(id = R.drawable.dummy_hamburger),
+            modifier = modifier
+                .size(40.dp)
+                .clip(CircleShape),
+            contentScale = ContentScale.Crop
+        )
+        if (model.contentSize != null) {
+            Box(
+                contentAlignment = Alignment.Center,
+                modifier = Modifier
+                    .align(Alignment.BottomEnd)
+                    .size(14.dp)
+                    .clip(CircleShape)
+                    .background(Color.White)
+            ) {
+                Text(
+                    text = model.contentSize.toString(),
+                    fontWeight = FontWeight.Bold,
+                    fontSize = 10.sp,
+                    lineHeight = 16.sp,
+                )
             }
-        }
-    ) { measurables, constraints ->
-        val imagePlaceable =
-            measurables.find { it.layoutId == MIDDLE_CONTENT_IMAGE }!!.measure(constraints)
-        val sizePlaceable =
-            measurables.find { it.layoutId == MIDDLE_CONTENT_SIZE }?.measure(constraints)
-        layout(imagePlaceable.width, imagePlaceable.height) {
-            imagePlaceable.placeRelative(0, 0)
-            sizePlaceable?.placeRelative(
-                x = imagePlaceable.width - sizePlaceable.width,
-                y = imagePlaceable.height - sizePlaceable.height,
-            )
         }
     }
 }
@@ -236,9 +221,6 @@ fun CheckoutYummyButtonPreview() {
         amount = "48.000d"
     ) {}
 }
-
-private const val MIDDLE_CONTENT_IMAGE = "middle_content_image"
-private const val MIDDLE_CONTENT_SIZE = "middle_content_size"
 
 data class YummyButtonContent(
     val imgUrl: String?,
