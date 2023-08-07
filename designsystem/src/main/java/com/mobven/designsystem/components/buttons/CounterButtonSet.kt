@@ -1,4 +1,4 @@
-package com.mobven.components.buttons
+package com.mobven.designsystem.components.buttons
 
 import androidx.compose.animation.AnimatedContent
 import androidx.compose.animation.ExperimentalAnimationApi
@@ -32,7 +32,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.mobven.components.R
-import com.mobven.components.common.YummyImage
+import com.mobven.designsystem.components.common.YummyImage
 
 @Composable
 fun TinyCounterButton(

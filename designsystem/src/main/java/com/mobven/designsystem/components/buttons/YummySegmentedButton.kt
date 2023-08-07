@@ -1,4 +1,4 @@
-package com.mobven.components.buttons
+package com.mobven.designsystem.components.buttons
 
 import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.animation.core.tween
