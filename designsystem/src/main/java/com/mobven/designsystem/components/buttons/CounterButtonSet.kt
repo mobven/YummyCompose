@@ -32,7 +32,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.mobven.components.R
-import com.mobven.designsystem.components.common.YummyImage
+import com.mobven.designsystem.components.common.YummyIcon
 
 @Composable
 fun TinyCounterButton(
@@ -66,15 +66,19 @@ fun SmallCounterButton(
         modifier = Modifier
             .size(96.dp, 32.dp)
             .border(1.dp, Color(0xFF9CA4AB), RoundedCornerShape(24.dp))
-            .padding(vertical = 8.dp, horizontal = 12.dp),
+            .padding(horizontal = 4.dp),
     ) {
-        YummyImage(imgResId = R.drawable.ic_minus, modifier = Modifier
-            .clip(CircleShape)
-            .clickable {
-                onCounterChanged(counterValue - 1)
-            })
+        YummyIcon(
+            painterRes = R.drawable.ic_minus,
+            tint = Color(0xFF66707A),
+            modifier = Modifier
+                .clip(CircleShape)
+                .clickable {
+                    onCounterChanged(counterValue - 1)
+                })
         AnimatedContent(
             targetState = counterValue,
+            contentAlignment = Alignment.Center,
             transitionSpec = {
                 if (targetState > initialState) {
                     slideInVertically { height -> height } + fadeIn() with
@@ -91,14 +95,17 @@ fun SmallCounterButton(
                 text = if (targetCount in 1..9) "0$targetCount" else targetCount.toString(),
                 fontWeight = FontWeight.Bold,
                 fontSize = 14.sp,
-                lineHeight = 24.sp
+                lineHeight = 24.sp,
             )
         }
-        YummyImage(imgResId = R.drawable.ic_plus, modifier = Modifier
-            .clip(CircleShape)
-            .clickable {
-                onCounterChanged(counterValue + 1)
-            })
+        YummyIcon(
+            painterRes = R.drawable.ic_plus,
+            tint = Color(0xFF0C0507),
+            modifier = Modifier
+                .clip(CircleShape)
+                .clickable {
+                    onCounterChanged(counterValue + 1)
+                })
     }
 }
 
@@ -116,11 +123,14 @@ fun BigCounterButton(
             .border(1.dp, Color(0xFF9CA4AB), RoundedCornerShape(24.dp))
             .padding(vertical = 8.dp, horizontal = 12.dp),
     ) {
-        YummyImage(imgResId = R.drawable.ic_minus, modifier = Modifier
-            .clip(CircleShape)
-            .clickable {
-                onCounterChanged(counterValue - 1)
-            })
+        YummyIcon(
+            painterRes = R.drawable.ic_minus,
+            tint = Color(0xFF66707A),
+            modifier = Modifier
+                .clip(CircleShape)
+                .clickable {
+                    onCounterChanged(counterValue - 1)
+                })
         AnimatedContent(
             targetState = counterValue,
             transitionSpec = {
@@ -142,11 +152,14 @@ fun BigCounterButton(
                 lineHeight = 24.sp
             )
         }
-        YummyImage(imgResId = R.drawable.ic_plus, modifier = Modifier
-            .clip(CircleShape)
-            .clickable {
-                onCounterChanged(counterValue + 1)
-            })
+        YummyIcon(
+            painterRes = R.drawable.ic_plus,
+            tint = Color(0xFF0C0507),
+            modifier = Modifier
+                .clip(CircleShape)
+                .clickable {
+                    onCounterChanged(counterValue + 1)
+                })
     }
 }
 
