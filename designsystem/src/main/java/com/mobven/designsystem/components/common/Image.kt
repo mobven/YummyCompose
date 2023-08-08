@@ -1,4 +1,4 @@
-package com.mobven.components.common
+package com.mobven.designsystem.components.common
 
 import androidx.annotation.DrawableRes
 import androidx.compose.foundation.Image

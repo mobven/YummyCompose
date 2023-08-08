@@ -1,4 +1,4 @@
-package com.mobven.components.buttons
+package com.mobven.designsystem.components.buttons
 
 import androidx.annotation.DrawableRes
 import androidx.compose.foundation.background
@@ -26,8 +26,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
 import com.mobven.components.R
-import com.mobven.components.common.HorizontalSpacer
-import com.mobven.components.common.YummyIcon
+import com.mobven.designsystem.components.common.HorizontalSpacer
+import com.mobven.designsystem.components.common.YummyIcon
 
 @Composable
 fun YummyButton(
