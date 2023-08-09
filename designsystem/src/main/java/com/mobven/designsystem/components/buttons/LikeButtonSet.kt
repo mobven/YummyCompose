@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -18,11 +19,12 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.scale
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.mobven.components.R
 import com.mobven.designsystem.components.common.YummyIcon
+import com.mobven.designsystem.theme.mainPrimary
+import com.mobven.designsystem.theme.neutralGrayscale70
 
 @Composable
 fun SmallLikeButton(
@@ -50,8 +52,8 @@ fun SmallLikeButton(
     YummyIcon(
         painterRes = if (isLiked) R.drawable.ic_heart_filled
         else R.drawable.ic_heart_outlined,
-        tint = if (isLiked) Color(0xFFF87146)
-        else Color(0xFF78828A),
+        tint = if (isLiked) MaterialTheme.colorScheme.mainPrimary
+        else MaterialTheme.colorScheme.neutralGrayscale70,
         modifier = modifier
             .padding(4.dp)
             .size(20.dp)
@@ -92,8 +94,8 @@ fun MediumLikeButton(
     YummyIcon(
         painterRes = if (isLiked) R.drawable.ic_heart_filled
         else R.drawable.ic_heart_outlined,
-        tint = if (isLiked) Color(0xFFF87146)
-        else Color(0xFF78828A),
+        tint = if (isLiked) MaterialTheme.colorScheme.mainPrimary
+        else MaterialTheme.colorScheme.neutralGrayscale70,
         modifier = modifier
             .padding(4.dp)
             .size(24.dp)
@@ -134,8 +136,8 @@ fun BigLikeButton(
     YummyIcon(
         painterRes = if (isLiked) R.drawable.ic_heart_filled
         else R.drawable.ic_heart_outlined,
-        tint = if (isLiked) Color(0xFFF87146)
-        else Color(0xFF78828A),
+        tint = if (isLiked) MaterialTheme.colorScheme.mainPrimary
+        else MaterialTheme.colorScheme.neutralGrayscale70,
         modifier = modifier
             .padding(4.dp)
             .size(36.dp)
