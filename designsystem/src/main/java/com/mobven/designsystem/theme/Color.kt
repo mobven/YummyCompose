@@ -22,7 +22,10 @@ internal val NeutralGrayscale70 = Color(0xFF78828A)
 internal val NeutralGrayscale80 = Color(0xFF66707A)
 internal val NeutralGrayscale90 = Color(0xFF434E58)
 internal val NeutralGrayscale100 = Color(0xFF171725)
+internal val PromoOrange = Color(0xFFF24822)
 
+internal val ColorScheme.promoOrange: Color
+    get() = PromoOrange
 internal val ColorScheme.mainPrimary: Color
     get() = MainPrimary
 internal val ColorScheme.mainSecondary: Color
