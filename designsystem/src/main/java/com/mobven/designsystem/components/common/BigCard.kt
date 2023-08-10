@@ -23,7 +23,7 @@ import com.mobven.designsystem.theme.neutralGrayscale80
 import com.mobven.designsystem.theme.promoOrange
 
 @Composable
-fun YummyBigCard() {
+fun YummyBigCard(isPromoEnabled: Boolean, discount: Int = 0) {
     Card(
         shape = RoundedCornerShape(8.dp),
         modifier = Modifier.fillMaxWidth(),
@@ -31,42 +31,46 @@ fun YummyBigCard() {
     ) {
         Column(modifier = Modifier.fillMaxWidth()) {
             BoxWithConstraints(modifier = Modifier.height(160.dp)) {
-                Column(
-                    modifier = Modifier
-                        .zIndex(1f)
-                        .padding(horizontal = 12.dp, vertical = 8.dp)
-                        .background(MaterialTheme.colorScheme.promoOrange),
-                ) {
-                    Text(
-                        text = "PROMO",
-                        color = Color.White,
-                        fontWeight = FontWeight.Bold,
+                if (isPromoEnabled) {
+                    Column(
                         modifier = Modifier
-                            .padding(horizontal = 8.dp, vertical = 4.dp)
-                    )
+                            .zIndex(1f)
+                            .padding(horizontal = 12.dp, vertical = 8.dp)
+                            .background(MaterialTheme.colorScheme.promoOrange),
+                    ) {
+                        Text(
+                            text = "PROMO",
+                            color = Color.White,
+                            fontWeight = FontWeight.Bold,
+                            modifier = Modifier
+                                .padding(horizontal = 8.dp, vertical = 4.dp)
+                        )
+                    }
                 }
                 YummyImage(
                     imgResId = R.drawable.yummy_big_card, modifier = Modifier
                         .height(144.dp)
                         .fillMaxWidth(), contentScale = ContentScale.Crop
                 )
-                Column(
-                    modifier = Modifier
-                        .zIndex(1f)
-                        .padding(end = 16.dp, top = 16.dp)
-                        .align(Alignment.BottomEnd)
-                        .background(
-                            MaterialTheme.colorScheme.mainSecondary,
-                            shape = RoundedCornerShape(16.dp)
-                        ),
-                ) {
-                    Text(
-                        text = "4% off your order",
-                        color = Color.White,
-                        fontWeight = FontWeight.Bold,
+                if (discount > 0) {
+                    Column(
                         modifier = Modifier
-                            .padding(horizontal = 12.dp, vertical = 6.dp)
-                    )
+                            .zIndex(1f)
+                            .padding(end = 16.dp, top = 16.dp)
+                            .align(Alignment.BottomEnd)
+                            .background(
+                                MaterialTheme.colorScheme.mainSecondary,
+                                shape = RoundedCornerShape(16.dp)
+                            ),
+                    ) {
+                        Text(
+                            text = "$discount% off your order",
+                            color = Color.White,
+                            fontWeight = FontWeight.Bold,
+                            modifier = Modifier
+                                .padding(horizontal = 12.dp, vertical = 6.dp)
+                        )
+                    }
                 }
             }
 
@@ -114,5 +118,5 @@ fun YummyProductInfo() {
 @Preview
 @Composable
 fun YummyBigCardPreview() {
-    YummyBigCard()
+    YummyBigCard(true, 4)
 }
