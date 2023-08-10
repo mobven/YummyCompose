@@ -17,6 +17,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -26,13 +27,15 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import com.mobven.components.R
-import com.mobven.designsystem.components.common.YummyImage
+import com.mobven.designsystem.components.common.YummyIcon
+import com.mobven.designsystem.theme.additionalDark
+import com.mobven.designsystem.theme.h4BoldStyle
+import com.mobven.designsystem.theme.h5SemiBoldStyle
+import com.mobven.designsystem.theme.neutralGrayscale50
+import com.mobven.designsystem.theme.neutralGrayscale80
 
 @Composable
 fun TinyCounterButton(
@@ -42,14 +45,12 @@ fun TinyCounterButton(
         contentAlignment = Alignment.Center,
         modifier = Modifier
             .size(32.dp)
-            .border(1.dp, Color(0xFFBFC6CC), CircleShape)
+            .border(1.dp, MaterialTheme.colorScheme.neutralGrayscale50, CircleShape)
     ) {
         Text(
             text = "${multiplier}x",
-            fontSize = 14.sp,
-            color = Color.Black,
-            fontWeight = FontWeight.SemiBold,
-            lineHeight = 20.sp
+            color = MaterialTheme.colorScheme.additionalDark,
+            style = MaterialTheme.typography.h5SemiBoldStyle
         )
     }
 }
@@ -65,16 +66,20 @@ fun SmallCounterButton(
         horizontalArrangement = Arrangement.SpaceBetween,
         modifier = Modifier
             .size(96.dp, 32.dp)
-            .border(1.dp, Color(0xFF9CA4AB), RoundedCornerShape(24.dp))
-            .padding(vertical = 8.dp, horizontal = 12.dp),
+            .border(1.dp, MaterialTheme.colorScheme.neutralGrayscale50, RoundedCornerShape(24.dp))
+            .padding(horizontal = 4.dp),
     ) {
-        YummyImage(imgResId = R.drawable.ic_minus, modifier = Modifier
-            .clip(CircleShape)
-            .clickable {
-                onCounterChanged(counterValue - 1)
-            })
+        YummyIcon(
+            painterRes = R.drawable.ic_minus,
+            tint = MaterialTheme.colorScheme.neutralGrayscale80,
+            modifier = Modifier
+                .clip(CircleShape)
+                .clickable {
+                    onCounterChanged(counterValue - 1)
+                })
         AnimatedContent(
             targetState = counterValue,
+            contentAlignment = Alignment.Center,
             transitionSpec = {
                 if (targetState > initialState) {
                     slideInVertically { height -> height } + fadeIn() with
@@ -89,16 +94,18 @@ fun SmallCounterButton(
         ) { targetCount ->
             Text(
                 text = if (targetCount in 1..9) "0$targetCount" else targetCount.toString(),
-                fontWeight = FontWeight.Bold,
-                fontSize = 14.sp,
-                lineHeight = 24.sp
+                color = MaterialTheme.colorScheme.additionalDark,
+                style = MaterialTheme.typography.h5SemiBoldStyle
             )
         }
-        YummyImage(imgResId = R.drawable.ic_plus, modifier = Modifier
-            .clip(CircleShape)
-            .clickable {
-                onCounterChanged(counterValue + 1)
-            })
+        YummyIcon(
+            painterRes = R.drawable.ic_plus,
+            tint = MaterialTheme.colorScheme.additionalDark,
+            modifier = Modifier
+                .clip(CircleShape)
+                .clickable {
+                    onCounterChanged(counterValue + 1)
+                })
     }
 }
 
@@ -113,14 +120,17 @@ fun BigCounterButton(
         horizontalArrangement = Arrangement.SpaceBetween,
         modifier = Modifier
             .size(112.dp, 40.dp)
-            .border(1.dp, Color(0xFF9CA4AB), RoundedCornerShape(24.dp))
+            .border(1.dp, MaterialTheme.colorScheme.neutralGrayscale50, RoundedCornerShape(24.dp))
             .padding(vertical = 8.dp, horizontal = 12.dp),
     ) {
-        YummyImage(imgResId = R.drawable.ic_minus, modifier = Modifier
-            .clip(CircleShape)
-            .clickable {
-                onCounterChanged(counterValue - 1)
-            })
+        YummyIcon(
+            painterRes = R.drawable.ic_minus,
+            tint = MaterialTheme.colorScheme.neutralGrayscale80,
+            modifier = Modifier
+                .clip(CircleShape)
+                .clickable {
+                    onCounterChanged(counterValue - 1)
+                })
         AnimatedContent(
             targetState = counterValue,
             transitionSpec = {
@@ -137,16 +147,18 @@ fun BigCounterButton(
         ) { targetCount ->
             Text(
                 text = if (targetCount in 1..9) "0$targetCount" else targetCount.toString(),
-                fontWeight = FontWeight.Bold,
-                fontSize = 18.sp,
-                lineHeight = 24.sp
+                color = MaterialTheme.colorScheme.additionalDark,
+                style = MaterialTheme.typography.h4BoldStyle
             )
         }
-        YummyImage(imgResId = R.drawable.ic_plus, modifier = Modifier
-            .clip(CircleShape)
-            .clickable {
-                onCounterChanged(counterValue + 1)
-            })
+        YummyIcon(
+            painterRes = R.drawable.ic_plus,
+            tint = MaterialTheme.colorScheme.additionalDark,
+            modifier = Modifier
+                .clip(CircleShape)
+                .clickable {
+                    onCounterChanged(counterValue + 1)
+                })
     }
 }
 

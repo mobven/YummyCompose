@@ -11,17 +11,20 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.sizeIn
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.mobven.components.R
 import com.mobven.designsystem.components.common.YummyImage
+import com.mobven.designsystem.theme.additionalDark
+import com.mobven.designsystem.theme.additionalWhite
+import com.mobven.designsystem.theme.h4SemiBoldStyle
 
 @Composable
 fun SocialMediaButton(
@@ -45,7 +48,11 @@ fun SocialMediaButton(
             verticalAlignment = Alignment.CenterVertically
         ) {
             YummyImage(imgResId = iconResId)
-            Text(title, color = Color.White, fontWeight = FontWeight.Bold)
+            Text(
+                title,
+                color = MaterialTheme.colorScheme.additionalWhite,
+                style = MaterialTheme.typography.h4SemiBoldStyle
+            )
         }
     }
 }
@@ -72,7 +79,7 @@ fun SocialMediaButtonPreview() {
             "Continue with Apple",
             R.drawable.ic_apple,
             modifier = Modifier.fillMaxWidth(),
-            Color.Black
+            MaterialTheme.colorScheme.additionalDark
         ) {}
     }
 }

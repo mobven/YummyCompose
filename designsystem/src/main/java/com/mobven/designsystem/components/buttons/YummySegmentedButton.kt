@@ -14,6 +14,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -23,36 +24,39 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.graphicsLayer
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
+import com.mobven.designsystem.theme.additionalGrey
+import com.mobven.designsystem.theme.additionalWhite
+import com.mobven.designsystem.theme.h4BoldStyle
+import com.mobven.designsystem.theme.mainSecondary
 
 @Composable
 fun YummySegmentedButton(
     selectedIndex: Int = 0,
     onIndexChanged: (Int) -> Unit
 ) {
+    val colorScheme = MaterialTheme.colorScheme
+
     BoxWithConstraints(
         modifier = Modifier
             .size(327.dp, 44.dp)
             .clip(RoundedCornerShape(8.dp))
-            .background(Color(0xFFF2F2F2))
+            .background(MaterialTheme.colorScheme.additionalGrey)
     ) {
 
         var firstItemColor by remember {
             mutableStateOf(
-                if (selectedIndex == 0) Color.White
-                else Color(0xFF78828A)
+                if (selectedIndex == 0) colorScheme.additionalWhite
+                else colorScheme.mainSecondary
             )
         }
         var secondItemColor by remember {
             mutableStateOf(
-                if (selectedIndex == 1) Color.White
-                else Color(0xFF78828A)
+                if (selectedIndex == 1) colorScheme.additionalWhite
+                else colorScheme.mainSecondary
             )
         }
         val translationXState by animateDpAsState(
@@ -60,10 +64,10 @@ fun YummySegmentedButton(
             targetValue = if (selectedIndex == 0) 0.dp else maxWidth / 2,
             label = ""
         ) {
-            firstItemColor = if (selectedIndex == 0) Color.White
-            else Color(0xFF78828A)
-            secondItemColor = if (selectedIndex == 1) Color.White
-            else Color(0xFF78828A)
+            firstItemColor = if (selectedIndex == 0) colorScheme.additionalWhite
+            else colorScheme.mainSecondary
+            secondItemColor = if (selectedIndex == 1) colorScheme.additionalWhite
+            else colorScheme.mainSecondary
         }
 
         Box(
@@ -75,7 +79,7 @@ fun YummySegmentedButton(
                 }
                 .padding(vertical = 2.dp, horizontal = 2.5.dp)
                 .clip(RoundedCornerShape(8.dp))
-                .background(Color(0xFF332C45))
+                .background(colorScheme.mainSecondary)
         )
 
         Row(
@@ -85,9 +89,7 @@ fun YummySegmentedButton(
             Text(
                 text = "Restaurants",
                 color = firstItemColor,
-                fontWeight = FontWeight.Bold,
-                fontSize = 16.sp,
-                lineHeight = 24.sp,
+                style = MaterialTheme.typography.h4BoldStyle,
                 textAlign = TextAlign.Center,
                 modifier = Modifier
                     .fillMaxHeight()
@@ -101,9 +103,7 @@ fun YummySegmentedButton(
             Text(
                 text = "Dishes",
                 color = secondItemColor,
-                fontWeight = FontWeight.Bold,
-                fontSize = 16.sp,
-                lineHeight = 24.sp,
+                style = MaterialTheme.typography.h4BoldStyle,
                 textAlign = TextAlign.Center,
                 modifier = Modifier
                     .fillMaxHeight()

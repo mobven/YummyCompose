@@ -12,6 +12,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.sizeIn
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -20,14 +21,20 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
 import com.mobven.components.R
 import com.mobven.designsystem.components.common.HorizontalSpacer
 import com.mobven.designsystem.components.common.YummyIcon
+import com.mobven.designsystem.theme.additionalWhite
+import com.mobven.designsystem.theme.h3SemiBoldStyle
+import com.mobven.designsystem.theme.h4BoldStyle
+import com.mobven.designsystem.theme.mainPrimary
+import com.mobven.designsystem.theme.neutralGrayscale100
+import com.mobven.designsystem.theme.neutralGrayscale30
+import com.mobven.designsystem.theme.neutralGrayscale90
+import com.mobven.designsystem.theme.xsmallBoldStyle
 
 @Composable
 fun YummyButton(
@@ -42,12 +49,16 @@ fun YummyButton(
             .sizeIn(86.dp, 44.dp)
             .clip(RoundedCornerShape(24.dp))
             .clickable { onClick() }
-            .background(if (isEnabled) Color(0xFFF87146) else Color(0xFFE3E9ED))
+            .background(
+                if (isEnabled) MaterialTheme.colorScheme.mainPrimary
+                else MaterialTheme.colorScheme.neutralGrayscale30
+            )
     ) {
         Text(
             text = text,
-            fontWeight = FontWeight.Bold,
-            color = if (isEnabled) Color.White else Color(0xFF434E58)
+            style = MaterialTheme.typography.h4BoldStyle,
+            color = if (isEnabled) MaterialTheme.colorScheme.additionalWhite
+            else MaterialTheme.colorScheme.neutralGrayscale90
         )
     }
 }
@@ -76,13 +87,12 @@ private fun YummyButtonContentItem(
                     .align(Alignment.BottomEnd)
                     .size(14.dp)
                     .clip(CircleShape)
-                    .background(Color.White)
+                    .background(MaterialTheme.colorScheme.additionalWhite)
             ) {
                 Text(
                     text = model.contentSize.toString(),
-                    fontWeight = FontWeight.Bold,
-                    fontSize = 10.sp,
-                    lineHeight = 16.sp,
+                    color = MaterialTheme.colorScheme.neutralGrayscale100,
+                    style = MaterialTheme.typography.xsmallBoldStyle,
                 )
             }
         }
@@ -95,9 +105,16 @@ private fun DummyButtonEndContent(
     modifier: Modifier = Modifier
 ) {
     Row(modifier = modifier) {
-        Text(text = text, color = Color.White, fontWeight = FontWeight.Bold)
+        Text(
+            text = text,
+            color = MaterialTheme.colorScheme.additionalWhite,
+            style = MaterialTheme.typography.h4BoldStyle
+        )
         HorizontalSpacer(width = 8.dp)
-        YummyIcon(painterRes = R.drawable.ic_arrow_right, tint = Color.White)
+        YummyIcon(
+            painterRes = R.drawable.ic_arrow_right,
+            tint = MaterialTheme.colorScheme.additionalWhite
+        )
     }
 }
 
@@ -112,7 +129,11 @@ private fun YummyButtonStartIcon(
             .clip(CircleShape)
             .background(Color.White)
     ) {
-        Text(text = content, fontWeight = FontWeight.Bold)
+        Text(
+            text = content,
+            style = MaterialTheme.typography.h3SemiBoldStyle,
+            color = MaterialTheme.colorScheme.neutralGrayscale100
+        )
     }
 }
 
@@ -146,7 +167,7 @@ fun DetailedYummyButton(
             .fillMaxWidth()
             .clip(RoundedCornerShape(24.dp))
             .clickable { onClick() }
-            .background(Color(0xFFF87146))
+            .background(MaterialTheme.colorScheme.mainPrimary)
             .padding(4.dp)
     ) {
         YummyButtonStartIcon(content = size.toString())
@@ -168,15 +189,15 @@ fun CheckoutYummyButton(
             .fillMaxWidth()
             .clip(RoundedCornerShape(24.dp))
             .clickable { onClick() }
-            .background(Color(0xFFF87146))
+            .background(MaterialTheme.colorScheme.mainPrimary)
             .padding(start = 4.dp, top = 4.dp, bottom = 4.dp, end = 12.dp)
     ) {
         YummyButtonStartIcon(content = multiplier)
         HorizontalSpacer(width = 12.dp)
         Text(
             text = amount,
-            color = Color.White,
-            fontWeight = FontWeight.Bold,
+            color = MaterialTheme.colorScheme.additionalWhite,
+            style = MaterialTheme.typography.h4BoldStyle,
             modifier = Modifier.weight(1f)
         )
         DummyButtonEndContent("Checkout")
