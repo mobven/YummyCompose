@@ -23,10 +23,15 @@ import com.mobven.designsystem.theme.neutralGrayscale80
 import com.mobven.designsystem.theme.promoOrange
 
 @Composable
-fun YummyBigCard(isPromoEnabled: Boolean, discount: Int = 0) {
+fun YummyBigCard(
+    isPromoEnabled: Boolean,
+    restaurant: Restaurant,
+    discount: Int = 0,
+    modifier: Modifier
+) {
     Card(
         shape = RoundedCornerShape(8.dp),
-        modifier = Modifier.fillMaxWidth(),
+        modifier = modifier,
         elevation = CardDefaults.cardElevation(defaultElevation = 10.dp)
     ) {
         Column(modifier = Modifier.fillMaxWidth()) {
@@ -74,15 +79,15 @@ fun YummyBigCard(isPromoEnabled: Boolean, discount: Int = 0) {
                 }
             }
 
-            YummyProductInfo()
+            YummyProductInfo(restaurant)
         }
     }
 }
 
 @Composable
-fun YummyProductInfo() {
+fun YummyProductInfo(restaurant: Restaurant) {
     Text(
-        text = "Hamburger",
+        text = restaurant.productName,
         fontWeight = FontWeight.Bold,
     )
     Row(
@@ -90,7 +95,7 @@ fun YummyProductInfo() {
         verticalAlignment = Alignment.CenterVertically
     ) {
         Text(
-            text = "1.5 km |",
+            text = "${restaurant.distance} |",
             color = MaterialTheme.colorScheme.neutralGrayscale70
         )
         YummyImage(
@@ -98,11 +103,11 @@ fun YummyProductInfo() {
             modifier = Modifier.padding(start = 6.dp, end = 6.dp),
         )
         Text(
-            text = "4.8",
+            text = restaurant.rate,
             color = MaterialTheme.colorScheme.neutralGrayscale80
         )
         Text(
-            text = "(1.2k)",
+            text = "(${restaurant.commentNumber})",
             modifier = Modifier.padding(start = 4.dp),
             color = MaterialTheme.colorScheme.neutralGrayscale80
         )
@@ -110,7 +115,7 @@ fun YummyProductInfo() {
             modifier = Modifier
                 .fillMaxWidth()
                 .wrapContentWidth(Alignment.End),
-            imgResId = R.drawable.ic_favourite,
+            imgResId = if (restaurant.isFavourite) R.drawable.ic_favourite else R.drawable.ic_not_favourite,
         )
     }
 }
@@ -118,5 +123,14 @@ fun YummyProductInfo() {
 @Preview
 @Composable
 fun YummyBigCardPreview() {
-    YummyBigCard(true, 4)
+    val restaurant = Restaurant("Hamburger", "1.5 km", "4.8", true, "1.2k")
+    YummyBigCard(true, restaurant, 4, Modifier.fillMaxWidth())
 }
+
+data class Restaurant(
+    val productName: String,
+    val distance: String,
+    val rate: String,
+    val isFavourite: Boolean,
+    val commentNumber: String
+)
