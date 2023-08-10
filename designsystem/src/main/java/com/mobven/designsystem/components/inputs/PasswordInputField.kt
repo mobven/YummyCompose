@@ -44,7 +44,7 @@ fun PasswordInputField(
     hint: String,
     modifier: Modifier = Modifier,
     isFocused: Boolean = false,
-    isError: Boolean = false,
+    isError: Boolean,
     errorMessage: String,
 ) {
 
@@ -54,22 +54,24 @@ fun PasswordInputField(
 
     val image = painterResource(id = R.drawable.eye_slash)
 
-
     Column {
         TextField(
             value = value.orEmpty(),
             onValueChange = onValueChange,
-            Modifier
+            modifier = Modifier
                 .fillMaxWidth()
-                .border(
-                    1.dp, NeutralGrayscale70, RoundedCornerShape(
-                        topStart = 20.dp,
-                        bottomStart = 16.dp,
-                        topEnd = 20.dp,
-                        bottomEnd = 16.dp
+                .conditional(!isFocused && !isError){
+                    border(
+                        1.dp, NeutralGrayscale70,
+                        RoundedCornerShape(
+                            topStart = 20.dp,
+                            bottomStart = 16.dp,
+                            topEnd = 20.dp,
+                            bottomEnd = 16.dp
+                        )
                     )
-                )
-                .conditional(isFocused) {
+                }
+                .conditional(isFocused && !isError) {
                     border(
                         1.dp, NeutralGrayscale100,
                         RoundedCornerShape(
@@ -137,13 +139,13 @@ fun PasswordInputField(
 @Composable
 fun PasswordVisibilityButton() {
     PasswordInputField(
-        value = "Password",
+        value = "Sample Value",
         onValueChange = {},
         cursorColor = NeutralGrayscale100,
         hint = "Password",
         modifier = Modifier,
-        isFocused = false,
         isError = false,
-        errorMessage = ""
+        isFocused = true,
+        errorMessage = "Error Message"
     )
 }
