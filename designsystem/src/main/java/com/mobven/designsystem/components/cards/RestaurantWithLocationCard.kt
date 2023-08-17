@@ -79,8 +79,6 @@ fun RestaurantWithLocationCard(
                     color = MaterialTheme.colorScheme.neutralGrayscale80
                 )
             }
-            VerticalSpacer(height = 4.dp)
-
         }
     }
 }
