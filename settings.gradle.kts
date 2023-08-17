@@ -16,3 +16,4 @@ dependencyResolutionManagement {
 rootProject.name = "YummyCompose"
 include(":app")
 include(":designsystem")
+include(":catalog")

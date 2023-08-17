@@ -113,7 +113,7 @@ fun PasswordInputField(
                 )
             },
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
-            visualTransformation = if (passwordVisible) PasswordVisualTransformation('⬟') else VisualTransformation.None,
+            visualTransformation = if (passwordVisible) PasswordVisualTransformation('⚫') else VisualTransformation.None,
             textStyle = TextStyle(fontSize = 16.sp),
             trailingIcon = {
                 IconButton(onClick = {passwordVisible = !passwordVisible}){
@@ -141,11 +141,11 @@ fun PasswordVisibilityButton() {
     PasswordInputField(
         value = "Sample Value",
         onValueChange = {},
-        cursorColor = NeutralGrayscale100,
+        cursorColor = Color.Red,
         hint = "Password",
         modifier = Modifier,
-        isError = false,
-        isFocused = true,
+        isError = true,
+        isFocused = false,
         errorMessage = "Error Message"
     )
 }
