@@ -60,7 +60,6 @@ fun PagerCard(
     var isSwiping by remember {
         mutableStateOf(false)
     }
-
     val selectedItem by remember(page) {
         mutableStateOf(items[page])
     }
@@ -86,21 +85,22 @@ fun PagerCard(
 
     Box(
         modifier = modifier
-        .pointerInput(Unit) {
-            detectDragGestures(onDragStart = {
-                isSwiping = true
-            }, onDragEnd = {
-                isSwiping = false
-            }) { change, dragAmount ->
-                change.consume()
-                swipeDirection = when {
-                    dragAmount.x.toInt() > 1 -> SwipeDirection.RIGHT
-                    dragAmount.x.toInt() < -1 -> SwipeDirection.LEFT
-                    else -> SwipeDirection.UNSPECIFIED
+            .clip(RoundedCornerShape(12.dp))
+            .pointerInput(Unit) {
+                detectDragGestures(onDragStart = {
+                    isSwiping = true
+                }, onDragEnd = {
+                    isSwiping = false
+                }) { change, dragAmount ->
+                    change.consume()
+                    swipeDirection = when {
+                        dragAmount.x.toInt() > 1 -> SwipeDirection.RIGHT
+                        dragAmount.x.toInt() < -1 -> SwipeDirection.LEFT
+                        else -> SwipeDirection.UNSPECIFIED
+                    }
                 }
             }
-        }
-        .clip(RoundedCornerShape(12.dp))) {
+    ) {
         YummyImage(
             imgResId = selectedItem.img,
             modifier = Modifier.fillMaxSize(),
@@ -117,7 +117,8 @@ fun PagerCard(
                         close()
                     }
                     drawPath(path, selectedItem.backgroundColor)
-                }) {
+                }
+        ) {
             Column(
                 Modifier.padding(start = 8.dp, end = 8.dp, top = 8.dp)
             ) {
@@ -201,7 +202,8 @@ fun PagerCardPreview() {
                     subTitle = "sale 5%",
                     backgroundColor = MaterialTheme.colorScheme.neutralGrayscale90
                 )
-            ), isAutomaticSwipeEnable = true, modifier = Modifier
+            ),
+            isAutomaticSwipeEnable = true, modifier = Modifier
                 .height(148.dp)
                 .fillMaxWidth()
         )
