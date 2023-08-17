@@ -12,6 +12,7 @@ import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -28,24 +29,27 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.DpSize
 import androidx.compose.ui.unit.dp
 import com.mobven.components.R
 import com.mobven.designsystem.components.common.YummyIcon
 import com.mobven.designsystem.theme.additionalDark
-import com.mobven.designsystem.theme.h4BoldStyle
 import com.mobven.designsystem.theme.h5SemiBoldStyle
 import com.mobven.designsystem.theme.neutralGrayscale50
 import com.mobven.designsystem.theme.neutralGrayscale80
 
 @Composable
-fun TinyCounterButton(
-    multiplier: Int
+fun CircularCounterButton(
+    multiplier: Int,
+    onClick: (Int) -> Unit
 ) {
     Box(
         contentAlignment = Alignment.Center,
         modifier = Modifier
             .size(32.dp)
             .border(1.dp, MaterialTheme.colorScheme.neutralGrayscale50, CircleShape)
+            .clip(CircleShape)
+            .clickable { onClick(multiplier) }
     ) {
         Text(
             text = "${multiplier}x",
@@ -57,7 +61,8 @@ fun TinyCounterButton(
 
 @OptIn(ExperimentalAnimationApi::class)
 @Composable
-fun SmallCounterButton(
+fun CounterButton(
+    type: CounterButtonType,
     counterValue: Int,
     onCounterChanged: (Int) -> Unit
 ) {
@@ -65,9 +70,15 @@ fun SmallCounterButton(
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.SpaceBetween,
         modifier = Modifier
-            .size(96.dp, 32.dp)
+            .size(
+                if (type == CounterButtonType.NORMAL) DpSize(96.dp, 32.dp)
+                else DpSize(112.dp, 40.dp)
+            )
             .border(1.dp, MaterialTheme.colorScheme.neutralGrayscale50, RoundedCornerShape(24.dp))
-            .padding(horizontal = 4.dp),
+            .padding(
+                if (type == CounterButtonType.NORMAL) PaddingValues(horizontal = 4.dp)
+                else PaddingValues(vertical = 8.dp, horizontal = 12.dp)
+            ),
     ) {
         YummyIcon(
             painterRes = R.drawable.ic_minus,
@@ -109,83 +120,26 @@ fun SmallCounterButton(
     }
 }
 
-@OptIn(ExperimentalAnimationApi::class)
-@Composable
-fun BigCounterButton(
-    counterValue: Int,
-    onCounterChanged: (Int) -> Unit
-) {
-    Row(
-        verticalAlignment = Alignment.CenterVertically,
-        horizontalArrangement = Arrangement.SpaceBetween,
-        modifier = Modifier
-            .size(112.dp, 40.dp)
-            .border(1.dp, MaterialTheme.colorScheme.neutralGrayscale50, RoundedCornerShape(24.dp))
-            .padding(vertical = 8.dp, horizontal = 12.dp),
-    ) {
-        YummyIcon(
-            painterRes = R.drawable.ic_minus,
-            tint = MaterialTheme.colorScheme.neutralGrayscale80,
-            modifier = Modifier
-                .clip(CircleShape)
-                .clickable {
-                    onCounterChanged(counterValue - 1)
-                })
-        AnimatedContent(
-            targetState = counterValue,
-            transitionSpec = {
-                if (targetState > initialState) {
-                    slideInVertically { height -> height } + fadeIn() with
-                            slideOutVertically { height -> -height } + fadeOut()
-                } else {
-                    slideInVertically { height -> -height } + fadeIn() with
-                            slideOutVertically { height -> height } + fadeOut()
-                }.using(
-                    SizeTransform(clip = false)
-                )
-            }, label = ""
-        ) { targetCount ->
-            Text(
-                text = if (targetCount in 1..9) "0$targetCount" else targetCount.toString(),
-                color = MaterialTheme.colorScheme.additionalDark,
-                style = MaterialTheme.typography.h4BoldStyle
-            )
-        }
-        YummyIcon(
-            painterRes = R.drawable.ic_plus,
-            tint = MaterialTheme.colorScheme.additionalDark,
-            modifier = Modifier
-                .clip(CircleShape)
-                .clickable {
-                    onCounterChanged(counterValue + 1)
-                })
-    }
+enum class CounterButtonType {
+    NORMAL,
+    BIG
 }
 
 @Preview(backgroundColor = 0xFFFFFF, showBackground = true)
 @Composable
 fun TinyCounterButtonPreview() {
-    TinyCounterButton(multiplier = 1)
-}
+    CircularCounterButton(multiplier = 1) {
 
-@Preview(backgroundColor = 0xFFFFFF, showBackground = true)
-@Composable
-fun SmallCounterButtonPreview() {
-    var counterValue by remember {
-        mutableStateOf(0)
-    }
-    SmallCounterButton(counterValue) {
-        counterValue = it
     }
 }
 
 @Preview(backgroundColor = 0xFFFFFF, showBackground = true)
 @Composable
-fun BigCounterButtonPreview() {
+fun CounterButtonPreview() {
     var counterValue by remember {
         mutableStateOf(0)
     }
-    BigCounterButton(counterValue) {
-        counterValue = it
+    CounterButton(type = CounterButtonType.BIG, counterValue) {
+        counterValue = if (it >= 0) it else 0
     }
 }

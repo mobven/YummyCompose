@@ -24,6 +24,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
@@ -32,43 +33,46 @@ import com.mobven.designsystem.theme.additionalGrey
 import com.mobven.designsystem.theme.additionalWhite
 import com.mobven.designsystem.theme.h4BoldStyle
 import com.mobven.designsystem.theme.mainSecondary
+import com.mobven.designsystem.theme.neutralGrayscale70
 
 @Composable
 fun YummySegmentedButton(
+    firstTitle: String,
+    secondTitle: String,
     selectedIndex: Int = 0,
-    onIndexChanged: (Int) -> Unit
+    animationDurationInMillis: Int,
+    segmentedButtonColors: SegmentedButtonColors = SegmentedButtonColors(
+        boxColor = MaterialTheme.colorScheme.mainSecondary,
+        backgroundColor = MaterialTheme.colorScheme.additionalGrey,
+        enableTextColor = MaterialTheme.colorScheme.additionalWhite,
+        disableTextColor = MaterialTheme.colorScheme.neutralGrayscale70
+    ),
+    onIndexChanged: (Int) -> Unit,
 ) {
-    val colorScheme = MaterialTheme.colorScheme
-
     BoxWithConstraints(
         modifier = Modifier
             .size(327.dp, 44.dp)
             .clip(RoundedCornerShape(8.dp))
-            .background(MaterialTheme.colorScheme.additionalGrey)
+            .background(segmentedButtonColors.backgroundColor)
     ) {
 
-        var firstItemColor by remember {
+        val firstItemColor by remember(selectedIndex) {
             mutableStateOf(
-                if (selectedIndex == 0) colorScheme.additionalWhite
-                else colorScheme.mainSecondary
+                if (selectedIndex == 0) segmentedButtonColors.enableTextColor
+                else segmentedButtonColors.disableTextColor
             )
         }
-        var secondItemColor by remember {
+        val secondItemColor by remember(selectedIndex) {
             mutableStateOf(
-                if (selectedIndex == 1) colorScheme.additionalWhite
-                else colorScheme.mainSecondary
+                if (selectedIndex == 1) segmentedButtonColors.enableTextColor
+                else segmentedButtonColors.disableTextColor
             )
         }
         val translationXState by animateDpAsState(
-            animationSpec = tween(300),
+            animationSpec = tween(animationDurationInMillis),
             targetValue = if (selectedIndex == 0) 0.dp else maxWidth / 2,
             label = ""
-        ) {
-            firstItemColor = if (selectedIndex == 0) colorScheme.additionalWhite
-            else colorScheme.mainSecondary
-            secondItemColor = if (selectedIndex == 1) colorScheme.additionalWhite
-            else colorScheme.mainSecondary
-        }
+        )
 
         Box(
             modifier = Modifier
@@ -79,7 +83,7 @@ fun YummySegmentedButton(
                 }
                 .padding(vertical = 2.dp, horizontal = 2.5.dp)
                 .clip(RoundedCornerShape(8.dp))
-                .background(colorScheme.mainSecondary)
+                .background(segmentedButtonColors.boxColor)
         )
 
         Row(
@@ -87,7 +91,7 @@ fun YummySegmentedButton(
             modifier = Modifier.fillMaxSize()
         ) {
             Text(
-                text = "Restaurants",
+                text = firstTitle,
                 color = firstItemColor,
                 style = MaterialTheme.typography.h4BoldStyle,
                 textAlign = TextAlign.Center,
@@ -101,7 +105,7 @@ fun YummySegmentedButton(
                     .weight(1f)
             )
             Text(
-                text = "Dishes",
+                text = secondTitle,
                 color = secondItemColor,
                 style = MaterialTheme.typography.h4BoldStyle,
                 textAlign = TextAlign.Center,
@@ -118,13 +122,32 @@ fun YummySegmentedButton(
     }
 }
 
+data class SegmentedButtonColors(
+    val boxColor: Color,
+    val backgroundColor: Color,
+    val enableTextColor: Color,
+    val disableTextColor: Color,
+)
+
 @Preview
 @Composable
 fun YummySegmentedButtonPreview() {
     var selectedIndex by remember {
         mutableStateOf(0)
     }
-    YummySegmentedButton(selectedIndex) {
-        selectedIndex = it
+    Box(
+        contentAlignment = Alignment.Center,
+        modifier = Modifier
+            .fillMaxSize()
+            .background(Color.White)
+    ) {
+        YummySegmentedButton(
+            firstTitle = "Restaurants",
+            secondTitle = "Dishes",
+            selectedIndex = selectedIndex,
+            animationDurationInMillis = 500
+        ) {
+            selectedIndex = it
+        }
     }
 }

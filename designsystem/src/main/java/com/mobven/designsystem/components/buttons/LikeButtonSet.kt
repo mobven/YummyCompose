@@ -7,7 +7,6 @@ import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
@@ -27,7 +26,7 @@ import com.mobven.designsystem.theme.mainPrimary
 import com.mobven.designsystem.theme.neutralGrayscale70
 
 @Composable
-fun SmallLikeButton(
+fun LikeButton(
     isLiked: Boolean,
     modifier: Modifier = Modifier,
     onClick: () -> Unit,
@@ -55,92 +54,6 @@ fun SmallLikeButton(
         tint = if (isLiked) MaterialTheme.colorScheme.mainPrimary
         else MaterialTheme.colorScheme.neutralGrayscale70,
         modifier = modifier
-            .padding(4.dp)
-            .size(20.dp)
-            .scale(scale)
-            .clickable(
-                interactionSource = interactionSource,
-                indication = null
-            ) {
-                isScaled = !isLiked
-                onClick.invoke()
-            }
-    )
-}
-
-@Composable
-fun MediumLikeButton(
-    isLiked: Boolean,
-    modifier: Modifier = Modifier,
-    onClick: () -> Unit,
-) {
-    val interactionSource = remember {
-        MutableInteractionSource()
-    }
-
-    var isScaled by rememberSaveable {
-        mutableStateOf(false)
-    }
-
-    val scale by animateFloatAsState(
-        targetValue = if (isScaled) 1.5f else 1f,
-        animationSpec = tween(400),
-        finishedListener = {
-            isScaled = false
-        },
-        label = ""
-    )
-
-    YummyIcon(
-        painterRes = if (isLiked) R.drawable.ic_heart_filled
-        else R.drawable.ic_heart_outlined,
-        tint = if (isLiked) MaterialTheme.colorScheme.mainPrimary
-        else MaterialTheme.colorScheme.neutralGrayscale70,
-        modifier = modifier
-            .padding(4.dp)
-            .size(24.dp)
-            .scale(scale)
-            .clickable(
-                interactionSource = interactionSource,
-                indication = null
-            ) {
-                isScaled = !isLiked
-                onClick.invoke()
-            }
-    )
-}
-
-@Composable
-fun BigLikeButton(
-    isLiked: Boolean,
-    modifier: Modifier = Modifier,
-    onClick: () -> Unit,
-) {
-    val interactionSource = remember {
-        MutableInteractionSource()
-    }
-
-    var isScaled by rememberSaveable {
-        mutableStateOf(false)
-    }
-
-    val scale by animateFloatAsState(
-        targetValue = if (isScaled) 1.5f else 1f,
-        animationSpec = tween(400),
-        finishedListener = {
-            isScaled = false
-        },
-        label = ""
-    )
-
-    YummyIcon(
-        painterRes = if (isLiked) R.drawable.ic_heart_filled
-        else R.drawable.ic_heart_outlined,
-        tint = if (isLiked) MaterialTheme.colorScheme.mainPrimary
-        else MaterialTheme.colorScheme.neutralGrayscale70,
-        modifier = modifier
-            .padding(4.dp)
-            .size(36.dp)
             .scale(scale)
             .clickable(
                 interactionSource = interactionSource,
@@ -154,14 +67,8 @@ fun BigLikeButton(
 
 @Preview
 @Composable
-fun LikeButtonPreview() {
-    var isLikedSmall by remember {
-        mutableStateOf(false)
-    }
-    var isLikedMedium by remember {
-        mutableStateOf(false)
-    }
-    var isLikedBig by remember {
+fun PreviewLikeButton() {
+    var isLiked by remember {
         mutableStateOf(false)
     }
     Column(
@@ -169,23 +76,11 @@ fun LikeButtonPreview() {
         verticalArrangement = Arrangement.Center,
         modifier = Modifier.fillMaxSize()
     ) {
-        SmallLikeButton(
-            isLikedSmall,
-            modifier = Modifier
+        LikeButton(
+            isLiked,
+            modifier = Modifier.size(24.dp)
         ) {
-            isLikedSmall = !isLikedSmall
-        }
-        MediumLikeButton(
-            isLikedMedium,
-            modifier = Modifier
-        ) {
-            isLikedMedium = !isLikedMedium
-        }
-        BigLikeButton(
-            isLikedBig,
-            modifier = Modifier
-        ) {
-            isLikedBig = !isLikedBig
+            isLiked = !isLiked
         }
     }
 }
