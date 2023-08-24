@@ -40,6 +40,7 @@ import com.mobven.designsystem.components.buttons.TinyCounterButtonPreview
 import com.mobven.designsystem.components.buttons.YummyButton
 import com.mobven.designsystem.components.buttons.YummyButtonContent
 import com.mobven.designsystem.components.buttons.YummySegmentedButtonPreview
+import com.mobven.designsystem.components.cards.PagerCardPreview
 import com.mobven.designsystem.components.common.CardOnePreview
 import com.mobven.designsystem.components.common.CardTwo
 import com.mobven.designsystem.components.common.YummyBigCardPreview
@@ -150,6 +151,9 @@ fun Catalog() {
                         CardOnePreview()
                         YummyCardTwoPreview()
                     }
+                }
+                item {
+                    PagerCardPreview()
                 }
             }
         }
