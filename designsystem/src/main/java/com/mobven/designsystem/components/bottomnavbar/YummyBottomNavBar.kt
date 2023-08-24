@@ -2,14 +2,20 @@ package com.mobven.designsystem.components.bottomnavbar
 
 import androidx.annotation.DrawableRes
 import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.Crossfade
+import androidx.compose.foundation.MutatePriority
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
+import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.RowScope
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.selection.selectable
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -19,9 +25,10 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.shadow
-import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.mobven.components.R
 import com.mobven.designsystem.components.common.VerticalSpacer
 import com.mobven.designsystem.components.common.YummyIcon
@@ -29,6 +36,7 @@ import com.mobven.designsystem.theme.AdditionalWhite
 import com.mobven.designsystem.theme.MainPrimary
 import com.mobven.designsystem.theme.NeutralGrayscale10
 import com.mobven.designsystem.theme.NeutralGrayscale80
+import com.mobven.designsystem.theme.h5SemiBoldStyle
 import com.mobven.designsystem.theme.sfProFamily
 
 
@@ -48,6 +56,7 @@ fun YummyBottomNavBar(
 
     Row(
         modifier = modifier
+            .padding(top = 12.dp)
             .fillMaxWidth()
             .shadow(
                 elevation = 20.dp,
@@ -55,8 +64,7 @@ fun YummyBottomNavBar(
                 ambientColor = AdditionalWhite
             )
             .height(88.dp)
-            .background(color = NeutralGrayscale10)
-            .padding(top = 12.dp),
+            .background(color = NeutralGrayscale10),
         horizontalArrangement = Arrangement.SpaceAround,
         verticalAlignment = Alignment.CenterVertically
     ) {
@@ -104,34 +112,65 @@ fun YummyBottomNavBar(
 }
 
 @Composable
-fun ItemBottomNavBar(
+fun RowScope.ItemBottomNavBar(
     @DrawableRes unselectedIcon: Int,
     @DrawableRes selectedIcon: Int,
     title: String,
     clickItemCallBack: () -> Unit,
     selectedItemTitle: String,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    interactionSource: MutableInteractionSource = remember { MutableInteractionSource() }
 ) {
     Column(
         modifier = modifier
-            .clickable {
-                clickItemCallBack.invoke()
-            },
+            .selectable(
+                selected = selectedItemTitle == title,
+                onClick = clickItemCallBack,
+                enabled = true,
+                role = Role.Tab,
+                interactionSource = interactionSource,
+                indication = null
+            )
+            .fillMaxSize()
+            .weight(1f),
+    ) {
+
+        Crossfade(targetState = selectedItemTitle == title, label = "") { isSelected ->
+            ItemIconNavBar(
+                isSelected = isSelected,
+                title = title,
+                unselectedIcon = unselectedIcon,
+                selectedIcon = selectedIcon
+            )
+        }
+    }
+
+}
+
+@Composable
+fun ItemIconNavBar(
+    isSelected: Boolean,
+    title: String,
+    @DrawableRes unselectedIcon: Int,
+    @DrawableRes selectedIcon: Int,
+    modifier: Modifier = Modifier
+) {
+    Column(
+        modifier = modifier,
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
     ) {
         YummyIcon(
-            painterRes = if (selectedItemTitle == title) selectedIcon else unselectedIcon,
-            tint = if (selectedItemTitle == title) MainPrimary else NeutralGrayscale80
+            painterRes = if (isSelected) selectedIcon else unselectedIcon,
+            tint = if (isSelected) MainPrimary else NeutralGrayscale80
         )
         VerticalSpacer(4.dp)
         Text(
             text = title,
-            fontFamily = sfProFamily,
-            color = if (selectedItemTitle == title) MainPrimary else NeutralGrayscale80
+            style = MaterialTheme.typography.h5SemiBoldStyle,
+            color = if (isSelected) MainPrimary else NeutralGrayscale80
         )
     }
-
 }
 
 @Preview
