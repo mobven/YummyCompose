@@ -1,6 +1,9 @@
 package com.mobven.designsystem.components.cards
 
 import androidx.annotation.DrawableRes
+import androidx.compose.animation.core.LinearEasing
+import androidx.compose.animation.core.animate
+import androidx.compose.animation.core.tween
 import androidx.compose.foundation.background
 import androidx.compose.foundation.gestures.detectDragGestures
 import androidx.compose.foundation.layout.Arrangement
@@ -43,6 +46,7 @@ import com.mobven.designsystem.theme.neutralGrayscale40
 import com.mobven.designsystem.theme.neutralGrayscale90
 import com.mobven.designsystem.theme.semanticSuccess
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 @Composable
 fun PagerCard(
@@ -62,6 +66,24 @@ fun PagerCard(
     }
     val selectedItem by remember(page) {
         mutableStateOf(items[page])
+    }
+    var upSideMultiplier by remember {
+        mutableStateOf(2.2f)
+    }
+    var downSideMultiplier by remember {
+        mutableStateOf(1.5f)
+    }
+
+    LaunchedEffect(page) {
+        launch {
+            animate(
+                1.5f, 2.2f,
+                animationSpec = tween(400, easing = LinearEasing)
+            ) { value, _ ->
+                upSideMultiplier = value
+                downSideMultiplier = 1.0f + ((value - 1.0f) * (1.5f - 1.0f) / (2.2f - 1.0f))
+            }
+        }
     }
 
     LaunchedEffect(isSwiping) {
@@ -111,8 +133,8 @@ fun PagerCard(
                 .fillMaxSize()
                 .drawBehind {
                     val path = Path().apply {
-                        lineTo(size.width / 2.2f, 0f)
-                        lineTo(size.width / 1.5f, size.height)
+                        lineTo(size.width / upSideMultiplier, 0f)
+                        lineTo(size.width / downSideMultiplier, size.height)
                         lineTo(0.0f, size.height)
                         close()
                     }
