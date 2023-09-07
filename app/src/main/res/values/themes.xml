@@ -2,4 +2,11 @@
 <resources>
 
     <style name="Theme.YummyCompose" parent="android:Theme.Material.Light.NoActionBar" />
+    
+    <style name="Theme.Splash.Yummy" parent="Theme.SplashScreen">
+        <item name="windowSplashScreenBackground">#FFF</item>
+        <item name="windowSplashScreenAnimatedIcon">@drawable/yummy_logo</item>
+        <item name="windowSplashScreenAnimationDuration">500</item>
+        <item name="postSplashScreenTheme">@style/Theme.YummyCompose</item>
+    </style>
 </resources>
