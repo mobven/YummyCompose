@@ -49,8 +49,9 @@ fun SmallCardSix(
     Card(
         shape = RoundedCornerShape(8.dp),
         modifier = Modifier
-            .width(327.dp)
-            .wrapContentHeight(),
+            .fillMaxWidth()
+            .wrapContentHeight()
+            .padding(horizontal = 24.dp),
         elevation = CardDefaults.cardElevation(defaultElevation = 4.dp)
     ) {
         Row(
@@ -70,9 +71,7 @@ fun SmallCardSix(
                     imgResId = imgRes,
                     modifier = Modifier
                         .width(56.dp)
-                        .height(56.dp)
-                        .fillMaxWidth()
-                        .fillMaxHeight(),
+                        .height(56.dp),
                     contentScale = ContentScale.Fit
                 )
             }
