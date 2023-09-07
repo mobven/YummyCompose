@@ -97,14 +97,14 @@ internal val Typography.h4SemiBoldStyle: TextStyle
         lineHeight = 24.sp,
         fontWeight = FontWeight.SemiBold,
     )
-internal val Typography.h4MediumStyle: TextStyle
+val Typography.h4MediumStyle: TextStyle
     get() = TextStyle(
         fontFamily = sfProFamily,
         fontSize = 16.sp,
         lineHeight = 24.sp,
         fontWeight = FontWeight.Medium,
     )
-internal val Typography.h5BoldStyle: TextStyle
+ val Typography.h5BoldStyle: TextStyle
     get() = TextStyle(
         fontFamily = sfProFamily,
         fontSize = 14.sp,
@@ -118,7 +118,7 @@ internal val Typography.h5SemiBoldStyle: TextStyle
         lineHeight = 20.sp,
         fontWeight = FontWeight.SemiBold,
     )
-internal val Typography.h5MediumStyle: TextStyle
+ val Typography.h5MediumStyle: TextStyle
     get() = TextStyle(
         fontFamily = sfProFamily,
         fontSize = 14.sp,
@@ -132,7 +132,7 @@ internal val Typography.smallBoldStyle: TextStyle
         lineHeight = 16.sp,
         fontWeight = FontWeight.Bold,
     )
-internal val Typography.smallSemiBoldStyle: TextStyle
+val Typography.smallSemiBoldStyle: TextStyle
     get() = TextStyle(
         fontFamily = sfProFamily,
         fontSize = 12.sp,

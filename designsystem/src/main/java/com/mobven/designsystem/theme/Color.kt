@@ -24,43 +24,43 @@ internal val NeutralGrayscale90 = Color(0xFF434E58)
 internal val NeutralGrayscale100 = Color(0xFF171725)
 internal val PromoOrange = Color(0xFFF24822)
 
-internal val ColorScheme.promoOrange: Color
+val ColorScheme.promoOrange: Color
     get() = PromoOrange
-internal val ColorScheme.mainPrimary: Color
+val ColorScheme.mainPrimary: Color
     get() = MainPrimary
-internal val ColorScheme.mainSecondary: Color
+val ColorScheme.mainSecondary: Color
     get() = MainSecondary
-internal val ColorScheme.semanticError: Color
+val ColorScheme.semanticError: Color
     get() = SemanticError
-internal val ColorScheme.semanticSuccess: Color
+val ColorScheme.semanticSuccess: Color
     get() = SemanticSuccess
-internal val ColorScheme.semanticWarning: Color
+val ColorScheme.semanticWarning: Color
     get() = SemanticWarning
 val ColorScheme.additionalDark: Color
     get() = AdditionalDark
-internal val ColorScheme.additionalWhite: Color
+val ColorScheme.additionalWhite: Color
     get() = AdditionalWhite
-internal val ColorScheme.additionalBeige: Color
+val ColorScheme.additionalBeige: Color
     get() = AdditionalBeige
-internal val ColorScheme.additionalGrey: Color
+val ColorScheme.additionalGrey: Color
     get() = AdditionalGrey
-internal val ColorScheme.neutralGrayscale10: Color
+val ColorScheme.neutralGrayscale10: Color
     get() = NeutralGrayscale10
-internal val ColorScheme.neutralGrayscale20: Color
+val ColorScheme.neutralGrayscale20: Color
     get() = NeutralGrayscale20
-internal val ColorScheme.neutralGrayscale30: Color
+val ColorScheme.neutralGrayscale30: Color
     get() = NeutralGrayscale30
-internal val ColorScheme.neutralGrayscale40: Color
+val ColorScheme.neutralGrayscale40: Color
     get() = NeutralGrayscale40
-internal val ColorScheme.neutralGrayscale50: Color
+val ColorScheme.neutralGrayscale50: Color
     get() = NeutralGrayscale50
-internal val ColorScheme.neutralGrayscale60: Color
+val ColorScheme.neutralGrayscale60: Color
     get() = NeutralGrayscale60
-internal val ColorScheme.neutralGrayscale70: Color
+val ColorScheme.neutralGrayscale70: Color
     get() = NeutralGrayscale70
-internal val ColorScheme.neutralGrayscale80: Color
+val ColorScheme.neutralGrayscale80: Color
     get() = NeutralGrayscale80
-internal val ColorScheme.neutralGrayscale90: Color
+val ColorScheme.neutralGrayscale90: Color
     get() = NeutralGrayscale90
-internal val ColorScheme.neutralGrayscale100: Color
+val ColorScheme.neutralGrayscale100: Color
     get() = NeutralGrayscale100
