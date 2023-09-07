@@ -20,6 +20,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
+import androidx.navigation.compose.currentBackStackEntryAsState
+import androidx.navigation.compose.rememberNavController
 import com.mobven.components.R
 import com.mobven.designsystem.components.bottomnavbar.YummyBottomNavBar
 import com.mobven.designsystem.components.buttons.CheckoutYummyButton
@@ -39,6 +41,7 @@ import com.mobven.designsystem.theme.additionalDark
 fun Catalog() {
 
     val context = LocalContext.current
+    val navController = rememberNavController()
 
     MaterialTheme {
         Surface {
@@ -54,35 +57,9 @@ fun Catalog() {
                 item { Text("Bottom Nav Bar", Modifier.padding(top = 16.dp)) }
                 item {
                     YummyBottomNavBar(
-                        navigationHomeScreen = {
-                            Toast.makeText(
-                                context,
-                                "Home Menu",
-                                Toast.LENGTH_SHORT
-                            ).show()
-                        },
-                        navigationFavouriteScreen = {
-                            Toast.makeText(
-                                context,
-                                "Fav Menu",
-                                Toast.LENGTH_SHORT
-                            ).show()
-                        },
-                        navigationOrderScreen = {
-                            Toast.makeText(
-                                context,
-                                "Order Menu",
-                                Toast.LENGTH_SHORT
-                            ).show()
-                        },
-                        navigationRewardScreen = {
-                            Toast.makeText(
-                                context,
-                                "Reward Menu",
-                                Toast.LENGTH_SHORT
-                            ).show()
-                        },
-                        selectedItemTitle = "Home"
+                        modifier = Modifier.fillMaxWidth(),
+                        navController = navController,
+                        backStackEntryState = navController.currentBackStackEntryAsState()
                     )
                 }
                 item { Text("Counter Buttons", Modifier.padding(top = 16.dp)) }

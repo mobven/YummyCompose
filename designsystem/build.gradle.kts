@@ -5,7 +5,7 @@ plugins {
 
 android {
     namespace = "com.mobven.components"
-    compileSdk = 33
+    compileSdk = 34
 
     defaultConfig {
         minSdk = 27
@@ -47,6 +47,8 @@ dependencies {
     implementation("androidx.compose.ui:ui-graphics")
     implementation("androidx.compose.ui:ui-tooling-preview")
     implementation("androidx.compose.material3:material3")
+    implementation("androidx.compose.material:material")
+    implementation("androidx.navigation:navigation-compose:2.7.1")
     debugImplementation("androidx.compose.ui:ui-test-manifest")
     debugImplementation("androidx.compose.ui:ui-tooling")
 
