@@ -51,9 +51,13 @@ fun SmallCardSix(
         modifier = Modifier
             .width(327.dp)
             .wrapContentHeight(),
-        elevation = CardDefaults.cardElevation(defaultElevation = 10.dp)
+        elevation = CardDefaults.cardElevation(defaultElevation = 4.dp)
     ) {
-        Row(modifier = Modifier.fillMaxWidth()) {
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .background(color = MaterialTheme.colorScheme.additionalWhite)
+        ) {
             BoxWithConstraints(
                 modifier = Modifier
                     .height(56.dp)
