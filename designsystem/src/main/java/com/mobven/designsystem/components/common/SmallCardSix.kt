@@ -51,8 +51,7 @@ fun SmallCardSix(
         modifier = Modifier
             .fillMaxWidth()
             .wrapContentHeight()
-            .padding(horizontal = 24.dp),
-        elevation = CardDefaults.cardElevation(defaultElevation = 4.dp)
+            .padding(horizontal = 24.dp)
     ) {
         Row(
             modifier = Modifier
@@ -101,7 +100,7 @@ fun SmallCardSix(
                 Text(
                     modifier = Modifier
                         .height(56.dp)
-                        .wrapContentHeight(),
+                        .wrapContentHeight().padding(end = 8.dp),
                     text = price,
                     style = MaterialTheme.typography.h4BoldStyle,
                     color = MaterialTheme.colorScheme.neutralGrayscale80,
