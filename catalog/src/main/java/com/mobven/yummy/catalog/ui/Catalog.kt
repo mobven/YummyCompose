@@ -2,8 +2,8 @@ package com.mobven.yummy.catalog.ui
 
 import android.widget.Toast
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ExperimentalLayoutApi
-import androidx.compose.foundation.layout.FlowRow
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.add
 import androidx.compose.foundation.layout.asPaddingValues
@@ -27,12 +27,20 @@ import androidx.navigation.compose.rememberNavController
 import com.mobven.components.R
 import com.mobven.designsystem.components.bottomnavbar.YummyBottomNavBar
 import com.mobven.designsystem.components.buttons.CheckoutYummyButton
+import com.mobven.designsystem.components.buttons.CheckoutYummyButtonPreview
 import com.mobven.designsystem.components.buttons.CircularCounterButton
 import com.mobven.designsystem.components.buttons.CounterButton
+import com.mobven.designsystem.components.buttons.CounterButtonPreview
 import com.mobven.designsystem.components.buttons.CounterButtonType
 import com.mobven.designsystem.components.buttons.DetailedYummyButton
+import com.mobven.designsystem.components.buttons.DetailedYummyButtonPreview
+import com.mobven.designsystem.components.buttons.DisabledYummyButtonPreview
+import com.mobven.designsystem.components.buttons.EnabledYummyButtonPreview
 import com.mobven.designsystem.components.buttons.LikeButton
+import com.mobven.designsystem.components.buttons.PreviewLikeButton
 import com.mobven.designsystem.components.buttons.SocialMediaButton
+import com.mobven.designsystem.components.buttons.SocialMediaButtonPreview
+import com.mobven.designsystem.components.buttons.TinyCounterButtonPreview
 import com.mobven.designsystem.components.buttons.YummyButton
 import com.mobven.designsystem.components.buttons.YummyButtonContent
 import com.mobven.designsystem.components.buttons.YummySegmentedButton
@@ -44,7 +52,6 @@ import com.mobven.designsystem.reward.RewardScreen
 import com.mobven.designsystem.theme.additionalDark
 import com.mobven.designsystem.util.navigate
 
-@OptIn(ExperimentalLayoutApi::class)
 @Composable
 fun Catalog() {
 
@@ -86,23 +93,14 @@ fun Catalog() {
                 }
                 item { Text("Counter Buttons", Modifier.padding(top = 16.dp)) }
                 item {
-                    FlowRow(horizontalArrangement = Arrangement.spacedBy(16.dp), verticalArrangement = Arrangement.spacedBy(16.dp)) {
+                    Column(verticalArrangement = Arrangement.spacedBy(16.dp)) {
                         CircularCounterButton(5) {
                             Toast.makeText(context, "Circular Counter Button", Toast.LENGTH_SHORT)
                                 .show()
                         }
+                        CounterButtonPreview()
                         CounterButton(
                             type = CounterButtonType.BIG,
-                            counterValue = 3,
-                            onCounterChanged = {
-                                Toast.makeText(
-                                    context,
-                                    "Big Counter Button: $it",
-                                    Toast.LENGTH_SHORT
-                                ).show()
-                            })
-                        CounterButton(
-                            type = CounterButtonType.NORMAL,
                             counterValue = 3,
                             onCounterChanged = {
                                 Toast.makeText(
@@ -115,91 +113,41 @@ fun Catalog() {
                 }
                 item { Text("Like Buttons", Modifier.padding(top = 16.dp)) }
                 item {
-                    FlowRow(horizontalArrangement = Arrangement.spacedBy(16.dp), verticalArrangement = Arrangement.spacedBy(16.dp)) {
-                        LikeButton(isLiked = true) {
-                            Toast.makeText(context, "Like Button Clicked", Toast.LENGTH_SHORT)
-                                .show()
-                        }
+                    Column(verticalArrangement = Arrangement.spacedBy(16.dp)) {
+                        PreviewLikeButton()
                     }
                 }
                 item { Text("Social Media Buttons", Modifier.padding(top = 16.dp)) }
                 item {
-                    FlowRow(horizontalArrangement = Arrangement.spacedBy(16.dp), verticalArrangement = Arrangement.spacedBy(16.dp)) {
-                        SocialMediaButton(
-                            "Continue with Google",
-                            R.drawable.ic_google,
-                            modifier = Modifier.fillMaxWidth(),
-                            Color(0xFF5384EE)
-                        ) {}
-                        SocialMediaButton(
-                            "Continue with Facebook ",
-                            R.drawable.ic_facebook,
-                            modifier = Modifier.fillMaxWidth(),
-                            Color(0xFF415792)
-                        ) {}
-                        SocialMediaButton(
-                            "Continue with Apple",
-                            R.drawable.ic_apple,
-                            modifier = Modifier.fillMaxWidth(),
-                            MaterialTheme.colorScheme.additionalDark
-                        ) {}
+                    Column(verticalArrangement = Arrangement.spacedBy(16.dp)) {
+                        SocialMediaButtonPreview()
                     }
                 }
                 item { Text("Yummy Buttons", Modifier.padding(top = 16.dp)) }
                 item {
-                    FlowRow(horizontalArrangement = Arrangement.spacedBy(16.dp), verticalArrangement = Arrangement.spacedBy(16.dp)) {
-                        YummyButton("Yummy Button Enabled") {
-                            Toast.makeText(context, "Yummy Button Clicked", Toast.LENGTH_SHORT)
-                                .show()
-                        }
-                        YummyButton("Yummy Button Disabled", isEnabled = false) {
-                            Toast.makeText(context, "Like Button Clicked", Toast.LENGTH_SHORT)
-                                .show()
-                        }
-                        DetailedYummyButton(
-                            size = 3, content = listOf(
-                                YummyButtonContent(
-                                    imgUrl = null, imgRes = null, contentSize = null
-                                ),
-                                YummyButtonContent(
-                                    imgUrl = null, imgRes = null, contentSize = 2
-                                ),
-                                YummyButtonContent(
-                                    imgUrl = null, imgRes = null, contentSize = null
-                                )
-                            )
-                        ) {
-                            Toast.makeText(
-                                context,
-                                "Detailed Yummy Button Clicked",
-                                Toast.LENGTH_SHORT
-                            ).show()
-                        }
-                        CheckoutYummyButton(multiplier = "2", amount = "100.00") {
-                            Toast.makeText(
-                                context,
-                                "Checkout Yummy Button Clicked",
-                                Toast.LENGTH_SHORT
-                            ).show()
-                        }
+                    Column(verticalArrangement = Arrangement.spacedBy(16.dp)) {
+                        EnabledYummyButtonPreview()
+                        DisabledYummyButtonPreview()
+                        DetailedYummyButtonPreview()
+                        CheckoutYummyButtonPreview()
                     }
                 }
                 item { Text("Segmented Button", Modifier.padding(top = 16.dp)) }
                 item {
-                    FlowRow(horizontalArrangement = Arrangement.spacedBy(16.dp), verticalArrangement = Arrangement.spacedBy(16.dp)) {
-                        YummySegmentedButton(
-                            firstTitle = "First",
-                            secondTitle = "Second",
-                            animationDurationInMillis = 300,
-                            onIndexChanged = {
-                                Toast.makeText(
-                                    context,
-                                    "Segmented Button Change: $it",
-                                    Toast.LENGTH_SHORT
-                                ).show()
-                            }
-                        )
+                    Column(verticalArrangement = Arrangement.spacedBy(16.dp)) {
+                        YummySegmentedButtonPreview()
                     }
+                }
+                item { Text("Yummy Cards", Modifier.padding(top = 16.dp)) }
+                item {
+                    Column(verticalArrangement = Arrangement.spacedBy(16.dp)) {
+                        YummyBigCardPreview()
+                        CardOnePreview()
+                        YummyCardTwoPreview()
+                    }
+                }
+                item {
+                    PagerCardPreview()
                 }
             }
         }
