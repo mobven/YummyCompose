@@ -49,6 +49,13 @@ import com.mobven.designsystem.home.HomeScreen
 import com.mobven.designsystem.navbarnavigation.Route
 import com.mobven.designsystem.order.OrderScreen
 import com.mobven.designsystem.reward.RewardScreen
+import com.mobven.designsystem.components.buttons.YummySegmentedButtonPreview
+import com.mobven.designsystem.components.cards.PagerCardPreview
+import com.mobven.designsystem.components.common.CardOnePreview
+import com.mobven.designsystem.components.common.CardTwo
+import com.mobven.designsystem.components.common.SmallCardSix
+import com.mobven.designsystem.components.common.YummyBigCardPreview
+import com.mobven.designsystem.components.common.YummyCardTwoPreview
 import com.mobven.designsystem.theme.additionalDark
 import com.mobven.designsystem.util.navigate
 
@@ -148,6 +155,17 @@ fun Catalog() {
                 }
                 item {
                     PagerCardPreview()
+                }
+
+                item {
+                    Column(verticalArrangement = Arrangement.spacedBy(16.dp)) {
+                        SmallCardSix(
+                            title = "Croissants",
+                            description = "happy not angry",
+                            price = "$7.02",
+                            imgRes = R.drawable.chicken_noodle
+                        )
+                    }
                 }
             }
         }
