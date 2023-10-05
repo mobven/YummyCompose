@@ -44,24 +44,24 @@ class MainActivity : ComponentActivity() {
                         )
                     }
                 ) {
-                    Box(
+                    NavHost(
                         modifier = Modifier
                             .fillMaxSize()
-                            .padding(it)
+                            .padding(it),
+                        navController = navController,
+                        startDestination = Route.HOME
                     ) {
-                        NavHost(navController = navController, startDestination = Route.HOME) {
-                            composable(Route.HOME) {
-                                HomeScreen(onNavigate = navController::navigate)
-                            }
-                            composable(Route.FAVOURITE) {
-                                FavouriteScreen(onNavigate = navController::navigate)
-                            }
-                            composable(Route.ORDER) {
-                                OrderScreen(onNavigate = navController::navigate)
-                            }
-                            composable(Route.REWARD) {
-                                RewardScreen(onNavigate = navController::navigate)
-                            }
+                        composable(Route.HOME) {
+                            HomeScreen(onNavigate = navController::navigate)
+                        }
+                        composable(Route.FAVOURITE) {
+                            FavouriteScreen(onNavigate = navController::navigate)
+                        }
+                        composable(Route.ORDER) {
+                            OrderScreen(onNavigate = navController::navigate)
+                        }
+                        composable(Route.REWARD) {
+                            RewardScreen(onNavigate = navController::navigate)
                         }
                     }
                 }
