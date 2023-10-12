@@ -20,6 +20,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.currentBackStackEntryAsState
+import androidx.navigation.compose.rememberNavController
 import com.mobven.components.R
 import com.mobven.designsystem.components.bottomnavbar.YummyBottomNavBar
 import com.mobven.designsystem.components.buttons.CheckoutYummyButton
@@ -39,6 +43,12 @@ import com.mobven.designsystem.components.buttons.SocialMediaButtonPreview
 import com.mobven.designsystem.components.buttons.TinyCounterButtonPreview
 import com.mobven.designsystem.components.buttons.YummyButton
 import com.mobven.designsystem.components.buttons.YummyButtonContent
+import com.mobven.designsystem.components.buttons.YummySegmentedButton
+import com.mobven.designsystem.favourite.FavouriteScreen
+import com.mobven.designsystem.home.HomeScreen
+import com.mobven.designsystem.navbarnavigation.Route
+import com.mobven.designsystem.order.OrderScreen
+import com.mobven.designsystem.reward.RewardScreen
 import com.mobven.designsystem.components.buttons.YummySegmentedButtonPreview
 import com.mobven.designsystem.components.cards.PagerCardPreview
 import com.mobven.designsystem.components.common.CardOnePreview
@@ -47,11 +57,13 @@ import com.mobven.designsystem.components.common.SmallCardSix
 import com.mobven.designsystem.components.common.YummyBigCardPreview
 import com.mobven.designsystem.components.common.YummyCardTwoPreview
 import com.mobven.designsystem.theme.additionalDark
+import com.mobven.designsystem.util.navigate
 
 @Composable
 fun Catalog() {
 
     val context = LocalContext.current
+    val navController = rememberNavController()
 
     MaterialTheme {
         Surface {
@@ -66,36 +78,24 @@ fun Catalog() {
             ) {
                 item { Text("Bottom Nav Bar", Modifier.padding(top = 16.dp)) }
                 item {
+                    NavHost(navController = navController, startDestination = Route.HOME) {
+                        composable(Route.HOME) {
+                            HomeScreen(onNavigate = navController::navigate)
+                        }
+                        composable(Route.FAVOURITE) {
+                            FavouriteScreen(onNavigate = navController::navigate)
+                        }
+                        composable(Route.ORDER) {
+                            OrderScreen(onNavigate = navController::navigate)
+                        }
+                        composable(Route.REWARD) {
+                            RewardScreen(onNavigate = navController::navigate)
+                        }
+                    }
                     YummyBottomNavBar(
-                        navigationHomeScreen = {
-                            Toast.makeText(
-                                context,
-                                "Home Menu",
-                                Toast.LENGTH_SHORT
-                            ).show()
-                        },
-                        navigationFavouriteScreen = {
-                            Toast.makeText(
-                                context,
-                                "Fav Menu",
-                                Toast.LENGTH_SHORT
-                            ).show()
-                        },
-                        navigationOrderScreen = {
-                            Toast.makeText(
-                                context,
-                                "Order Menu",
-                                Toast.LENGTH_SHORT
-                            ).show()
-                        },
-                        navigationRewardScreen = {
-                            Toast.makeText(
-                                context,
-                                "Reward Menu",
-                                Toast.LENGTH_SHORT
-                            ).show()
-                        },
-                        selectedItemTitle = "Home"
+                        modifier = Modifier.fillMaxWidth(),
+                        navController = navController,
+                        backStackEntryState = navController.currentBackStackEntryAsState()
                     )
                 }
                 item { Text("Counter Buttons", Modifier.padding(top = 16.dp)) }
