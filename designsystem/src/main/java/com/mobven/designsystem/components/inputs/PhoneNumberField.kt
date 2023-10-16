@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.material3.TextFieldDefaults
@@ -23,6 +24,7 @@ import com.mobven.designsystem.components.common.VerticalSpacer
 import com.mobven.designsystem.components.common.conditional
 import com.mobven.designsystem.theme.NeutralGrayscale100
 import com.mobven.designsystem.theme.SemanticError
+import com.mobven.designsystem.theme.neutralGrayscale60
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -34,8 +36,7 @@ fun PhoneNumberField(
     cursorColor: Color,
     keyboardType: KeyboardType = KeyboardType.Ascii,
     visualTransformation: VisualTransformation = VisualTransformation.None,
-    errorMessage: String,
-    isError: Boolean,
+    errorMessage: String?,
     isFocused: Boolean = false
 ) {
 
@@ -56,7 +57,15 @@ fun PhoneNumberField(
                         )
                     )
                 }
-                .conditional(isError) {
+                .border(
+                    1.dp, MaterialTheme.colorScheme.neutralGrayscale60, RoundedCornerShape(
+                        topStart = 20.dp,
+                        bottomStart = 16.dp,
+                        topEnd = 20.dp,
+                        bottomEnd = 16.dp
+                    )
+                )
+                .conditional(errorMessage != null) {
                     border(
                         1.dp, SemanticError, RoundedCornerShape(
                             topStart = 20.dp,
@@ -91,7 +100,7 @@ fun PhoneNumberField(
             visualTransformation = visualTransformation
         )
         VerticalSpacer(height = 8.dp)
-        if (isError) {
+        if (errorMessage != null) {
             Text(
                 text = errorMessage, style = TextStyle(
                     fontSize = 14.sp,
@@ -115,7 +124,6 @@ fun PhoneNumberFieldPreview() {
             .fillMaxWidth(),
         cursorColor = NeutralGrayscale100,
         errorMessage = "Sample Error Message",
-        isError = false,
         isFocused = true
     )
 }
@@ -131,6 +139,5 @@ fun PhoneNumberFieldErrorPreview() {
             .fillMaxWidth(),
         cursorColor = NeutralGrayscale100,
         errorMessage = "Sample Error Message",
-        isError = true,
     )
 }
