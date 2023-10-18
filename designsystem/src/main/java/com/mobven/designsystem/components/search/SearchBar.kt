@@ -10,9 +10,10 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
@@ -26,14 +27,15 @@ import com.mobven.designsystem.theme.h5NormalStyle
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun SearchBar(
-    state: MutableState<String>,
+    text: String,
+    onTextChange: (String) -> Unit,
     hint: String
 ) {
 
     TextField(
-        value = state.value,
+        value = text,
         onValueChange = { value ->
-            state.value = value
+            onTextChange(value)
         },
         modifier = Modifier
             .fillMaxWidth()
@@ -67,9 +69,13 @@ fun SearchBar(
 @Preview
 @Composable
 fun SearchBarPreviewEmpty() {
-    val textState = remember { mutableStateOf("") }
+    var textState by remember { mutableStateOf("") }
     SearchBar(
-        state = textState,
+        text = textState,
+        onTextChange = { newText ->
+            textState = newText
+            // Burada arama işlemlerini yapabilirsiniz
+        },
         hint = "What are you yearning for?"
     )
 }
@@ -77,9 +83,13 @@ fun SearchBarPreviewEmpty() {
 @Preview
 @Composable
 fun SearchBarPreview() {
-    val textState = remember { mutableStateOf("Yummy food") }
+    var textState by remember { mutableStateOf("Yummy food") }
     SearchBar(
-        state = textState,
+        text = textState,
+        onTextChange = { newText ->
+            textState = newText
+            // Burada arama işlemlerini yapabilirsiniz
+        },
         hint = "What are you yearning for?"
     )
 }
