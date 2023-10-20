@@ -15,6 +15,7 @@ internal val sfProFamily = FontFamily(
     Font(R.font.sf_pro_light_italic, FontWeight.Light, FontStyle.Italic),
     Font(R.font.sf_pro_medium, FontWeight.Medium),
     Font(R.font.sf_pro_regular, FontWeight.Normal),
+    Font(R.font.sf_pro_regular, FontWeight.SemiBold),
     Font(R.font.sf_pro_semibold_italic, FontWeight.SemiBold, FontStyle.Italic),
     Font(R.font.sf_pro_thin_italic, FontWeight.Thin, FontStyle.Italic),
     Font(R.font.sf_pro_ultra_light_italic, FontWeight.ExtraLight, FontStyle.Italic)
