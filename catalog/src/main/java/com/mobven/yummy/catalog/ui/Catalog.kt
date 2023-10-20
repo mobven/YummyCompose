@@ -42,10 +42,11 @@ import com.mobven.designsystem.components.buttons.YummyButton
 import com.mobven.designsystem.components.buttons.YummySegmentedButtonPreview
 import com.mobven.designsystem.components.cards.PagerCardPreview
 import com.mobven.designsystem.components.common.CardOnePreview
-import com.mobven.designsystem.components.common.OtpSuccessDialog
 import com.mobven.designsystem.components.common.SmallCardSix
 import com.mobven.designsystem.components.common.YummyBigCardPreview
 import com.mobven.designsystem.components.common.YummyCardTwoPreview
+import com.mobven.designsystem.components.dialogs.BaseDialog
+import com.mobven.designsystem.components.dialogs.OtpSuccessDialog
 import com.mobven.designsystem.favourite.FavouriteScreen
 import com.mobven.designsystem.home.HomeScreen
 import com.mobven.designsystem.navbarnavigation.Route
@@ -58,6 +59,7 @@ fun Catalog() {
 
     val context = LocalContext.current
     var isShowingOtpDialog by remember { mutableStateOf(false) }
+    var isShowingBaseDialog by remember { mutableStateOf(false) }
     val navController = rememberNavController()
 
     MaterialTheme {
@@ -174,6 +176,16 @@ fun Catalog() {
                             })
                     }
                 }
+                item {
+                    Column(verticalArrangement = Arrangement.spacedBy(16.dp)) {
+                        YummyButton(
+                            "Show Base Dialog",
+                            modifier = Modifier.fillMaxWidth(),
+                            onClick = {
+                                isShowingBaseDialog = true
+                            })
+                    }
+                }
             }
         }
 
@@ -189,6 +201,23 @@ fun Catalog() {
                         Toast.LENGTH_SHORT
                     ).show()
                     isShowingOtpDialog = false
+                })
+        }
+
+        if (isShowingBaseDialog) {
+            BaseDialog(
+                title = "Thank you for your feedback",
+                description = "We will continue improving our service and pleasing you in the next order. ",
+                imgRes = R.drawable.ic_google,
+                buttonText = "Back to homepage", /* null gönderilirse buton eklenmiyor */
+                onDismiss = { isShowingBaseDialog = false },
+                onConfirm = {
+                    Toast.makeText(
+                        context,
+                        "BaseDialog",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                    isShowingBaseDialog = false
                 })
         }
     }

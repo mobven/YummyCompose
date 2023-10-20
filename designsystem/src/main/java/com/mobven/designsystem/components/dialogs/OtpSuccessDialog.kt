@@ -1,4 +1,4 @@
-package com.mobven.designsystem.components.common
+package com.mobven.designsystem.components.dialogs
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -22,6 +22,7 @@ import androidx.compose.ui.window.Dialog
 import androidx.compose.ui.window.DialogProperties
 import com.mobven.components.R
 import com.mobven.designsystem.components.buttons.YummyButton
+import com.mobven.designsystem.components.common.YummyImage
 import com.mobven.designsystem.theme.additionalWhite
 import com.mobven.designsystem.theme.h3SemiBoldStyle
 import com.mobven.designsystem.theme.h4SemiBoldStyle
