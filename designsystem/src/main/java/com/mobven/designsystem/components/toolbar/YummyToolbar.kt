@@ -44,6 +44,7 @@ fun YummyToolbar(
         modifier = modifier
             .shadow(elevation)
             .background(backgroundColor)
+            .padding(top = 45.dp)
     ) {
         YummyIcon(
             painterRes = icon,

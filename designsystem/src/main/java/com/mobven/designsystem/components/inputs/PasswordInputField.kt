@@ -9,6 +9,7 @@ import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.material3.TextFieldDefaults
@@ -34,6 +35,10 @@ import com.mobven.designsystem.theme.AdditionalGrey
 import com.mobven.designsystem.theme.NeutralGrayscale100
 import com.mobven.designsystem.theme.NeutralGrayscale70
 import com.mobven.designsystem.theme.SemanticError
+import com.mobven.designsystem.theme.additionalWhite
+import com.mobven.designsystem.theme.h4MediumStyle
+import com.mobven.designsystem.theme.neutralGrayscale100
+import com.mobven.designsystem.theme.neutralGrayscale80
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -51,8 +56,6 @@ fun PasswordInputField(
     var passwordVisible by rememberSaveable {
         mutableStateOf(true)
     }
-
-    val image = painterResource(id = R.drawable.eye_slash)
 
     Column {
         TextField(
@@ -94,7 +97,8 @@ fun PasswordInputField(
                 }
                 .height(56.dp),
             colors = TextFieldDefaults.textFieldColors(
-                containerColor = AdditionalGrey,
+                textColor = MaterialTheme.colorScheme.neutralGrayscale100,
+                containerColor = MaterialTheme.colorScheme.additionalWhite,
                 cursorColor = cursorColor,
                 focusedIndicatorColor = Color.Transparent,
                 unfocusedIndicatorColor = Color.Transparent,
@@ -109,7 +113,8 @@ fun PasswordInputField(
             placeholder = {
                 Text(
                     hint,
-                    style = TextStyle(fontSize = 16.sp)
+                    style = MaterialTheme.typography.h4MediumStyle,
+                    color = MaterialTheme.colorScheme.neutralGrayscale80
                 )
             },
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
@@ -117,7 +122,7 @@ fun PasswordInputField(
             textStyle = TextStyle(fontSize = 16.sp),
             trailingIcon = {
                 IconButton(onClick = {passwordVisible = !passwordVisible}){
-                    Icon(image, "")
+                    Icon(painterResource(id = R.drawable.eye_slash), "", tint = Color.Unspecified)
                 }
             }
         )

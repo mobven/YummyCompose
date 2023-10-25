@@ -1,4 +1,4 @@
-package com.mobven.yummy.ui.theme.login
+package com.mobven.yummy.ui.screens.login
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -10,9 +10,14 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material3.Divider
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -27,7 +32,10 @@ import com.mobven.designsystem.components.inputs.PhoneNumberField
 import com.mobven.designsystem.components.toolbar.YummyToolbar
 import com.mobven.designsystem.theme.additionalDark
 import com.mobven.designsystem.theme.additionalWhite
+import com.mobven.designsystem.theme.grayscale200
+import com.mobven.designsystem.theme.grayscale600
 import com.mobven.designsystem.theme.h4BoldStyle
+import com.mobven.designsystem.theme.h4MediumStyle
 import com.mobven.designsystem.theme.h5BoldStyle
 import com.mobven.designsystem.theme.h5MediumStyle
 import com.mobven.designsystem.theme.h5SemiBoldStyle
@@ -38,37 +46,54 @@ import com.mobven.designsystem.theme.promoOrange
 fun LoginScreen(
     onIconClick: () -> Unit
 ) {
-    val scrollState = rememberScrollState()
+
+    var phoneNumberState by remember {
+        mutableStateOf("")
+    }
+
+    var passwordState by remember {
+        mutableStateOf("")
+    }
 
     Column(
         Modifier
             .fillMaxSize()
             .background(MaterialTheme.colorScheme.additionalWhite)
-            .verticalScroll(scrollState)
+            .verticalScroll(rememberScrollState())
     ) {
+
         YummyToolbar(
             title = "Sign in",
-            icon = com.mobven.components.R.drawable.ic_arrow_left,
+            icon = R.drawable.ic_arrow_left,
             onIconClick = onIconClick,
             modifier = Modifier.fillMaxWidth()
         )
+
         VerticalSpacer(height = 24.dp)
+
         PhoneNumberField(
             title = "Phone number",
+            value = phoneNumberState,
             inputHint = "Enter your phone number",
             modifier = Modifier.padding(horizontal = 24.dp)
-        ) { inputText ->
-            //handle text change
+        ) { phoneNumber ->
+            phoneNumberState = phoneNumber
         }
+
         VerticalSpacer(height = 16.dp)
+
         PasswordField(
             title = "Password",
             inputHint = "Enter Password",
+            value = passwordState,
+            hasError = false,
             modifier = Modifier.padding(horizontal = 24.dp)
-        ) { inputText ->
-            //handle text change
+        ) { password ->
+            passwordState = password
         }
+
         VerticalSpacer(height = 4.dp)
+
         Text(
             text = "Forgot password?",
             style = MaterialTheme.typography.h5SemiBoldStyle,
@@ -79,28 +104,67 @@ fun LoginScreen(
                     //handle click event
                 }
         )
+
         VerticalSpacer(height = 32.dp)
+
         YummyButton(
-            text = "Sign in",
-            modifier = Modifier
+            text = "Sign in", modifier = Modifier
                 .fillMaxWidth()
                 .padding(horizontal = 24.dp)
         ) {
             // handle click event
         }
+
         VerticalSpacer(height = 32.dp)
-        Text(text = "sadsadasda")
+
+        TextBetweenDividers(text = "or", modifier = Modifier.padding(horizontal = 10.dp))
+
         VerticalSpacer(height = 24.dp)
+
         TripleSocialMediaButtons(
             modifier = Modifier.padding(horizontal = 24.dp),
-            onGoogleClick = { /*TODO*/ },
-            onFacebookClick = { /*TODO*/ },
-            onAppleClick = { /*TODO*/ }
+            onGoogleClick = { /*handle click event*/ },
+            onFacebookClick = { /*handle click event*/ },
+            onAppleClick = { /*handle click event*/ }
         )
+
         VerticalSpacer(height = 24.dp)
-        SignupText(modifier = Modifier.fillMaxWidth().align(Alignment.CenterHorizontally)) {
+
+        SignupText(
+            modifier = Modifier
+                .fillMaxWidth()
+                .align(Alignment.CenterHorizontally)
+        ) {
             //handle click event
         }
+    }
+}
+
+@Composable
+fun TextBetweenDividers(
+    text: String,
+    modifier: Modifier = Modifier
+) {
+    Row(
+        verticalAlignment = Alignment.CenterVertically,
+        horizontalArrangement = Arrangement.spacedBy(16.dp, Alignment.CenterHorizontally),
+        modifier = modifier
+    ) {
+        Divider(
+            color = MaterialTheme.colorScheme.grayscale200,
+            thickness = 1.dp,
+            modifier = Modifier.weight(1f)
+        )
+        Text(
+            text = text,
+            style = MaterialTheme.typography.h4MediumStyle,
+            color = MaterialTheme.colorScheme.grayscale600
+        )
+        Divider(
+            color = MaterialTheme.colorScheme.grayscale200,
+            thickness = 1.dp,
+            modifier = Modifier.weight(1f)
+        )
     }
 }
 
@@ -169,8 +233,9 @@ fun TripleSocialMediaButtons(
 fun PhoneNumberField(
     title: String,
     inputHint: String,
-    errorMessage: String? = null,
+    value: String,
     modifier: Modifier = Modifier,
+    errorMessage: String? = null,
     cursorColor: Color = Color.Unspecified,
     textStyle: androidx.compose.ui.text.TextStyle = MaterialTheme.typography.h4BoldStyle.copy(
         color = MaterialTheme.colorScheme.neutralGrayscale100,
@@ -182,9 +247,12 @@ fun PhoneNumberField(
             text = title,
             style = textStyle,
         )
+
         VerticalSpacer(height = 16.dp)
+
         PhoneNumberField(
             hint = inputHint,
+            value = value,
             onValueChanged = onInputChange,
             cursorColor = cursorColor,
             errorMessage = errorMessage,
@@ -195,9 +263,11 @@ fun PhoneNumberField(
 @Composable
 fun PasswordField(
     title: String,
+    value: String,
     inputHint: String,
-    errorMessage: String? = null,
+    hasError: Boolean,
     modifier: Modifier = Modifier,
+    errorMessage: String? = null,
     cursorColor: Color = Color.Unspecified,
     textStyle: androidx.compose.ui.text.TextStyle = MaterialTheme.typography.h4BoldStyle.copy(
         color = MaterialTheme.colorScheme.neutralGrayscale100,
@@ -209,14 +279,16 @@ fun PasswordField(
             text = title,
             style = textStyle,
         )
+
         VerticalSpacer(height = 16.dp)
+
         PasswordInputField(
-            value = "nonumes",
-            onValueChange = {},
-            cursorColor = Color.Unspecified,
-            hint = "",
-            isError = false,
-            errorMessage = "postulant"
+            value = value,
+            onValueChange = onInputChange,
+            cursorColor = cursorColor,
+            hint = inputHint,
+            isError = hasError,
+            errorMessage = errorMessage.orEmpty()
         )
     }
 }
@@ -224,7 +296,5 @@ fun PasswordField(
 @Preview
 @Composable
 fun LoginScreenPreview() {
-    LoginScreen() {
-
-    }
+    LoginScreen {}
 }

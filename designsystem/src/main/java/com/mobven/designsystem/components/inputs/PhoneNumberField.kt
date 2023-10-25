@@ -24,7 +24,11 @@ import com.mobven.designsystem.components.common.VerticalSpacer
 import com.mobven.designsystem.components.common.conditional
 import com.mobven.designsystem.theme.NeutralGrayscale100
 import com.mobven.designsystem.theme.SemanticError
+import com.mobven.designsystem.theme.grayscale200
+import com.mobven.designsystem.theme.h4MediumStyle
+import com.mobven.designsystem.theme.neutralGrayscale100
 import com.mobven.designsystem.theme.neutralGrayscale60
+import com.mobven.designsystem.theme.neutralGrayscale80
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -77,6 +81,7 @@ fun PhoneNumberField(
                 }
                 .height(56.dp),
             colors = TextFieldDefaults.textFieldColors(
+                textColor = MaterialTheme.colorScheme.neutralGrayscale100,
                 containerColor = Color.White,
                 cursorColor = cursorColor,
                 focusedIndicatorColor = Color.Transparent,
@@ -92,7 +97,8 @@ fun PhoneNumberField(
             placeholder = {
                 Text(
                     hint,
-                    style = TextStyle(fontSize = 16.sp)
+                    style = MaterialTheme.typography.h4MediumStyle,
+                    color = MaterialTheme.colorScheme.neutralGrayscale80
                 )
             },
             textStyle = TextStyle(fontSize = 16.sp),
