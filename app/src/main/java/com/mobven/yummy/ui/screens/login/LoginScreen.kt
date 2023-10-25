@@ -44,7 +44,7 @@ import com.mobven.designsystem.theme.promoOrange
 
 @Composable
 fun LoginScreen(
-    onIconClick: () -> Unit
+    onBackClick: () -> Unit
 ) {
 
     var phoneNumberState by remember {
@@ -65,7 +65,7 @@ fun LoginScreen(
         YummyToolbar(
             title = "Sign in",
             icon = R.drawable.ic_arrow_left,
-            onIconClick = onIconClick,
+            onIconClick = onBackClick,
             modifier = Modifier.fillMaxWidth()
         )
 
