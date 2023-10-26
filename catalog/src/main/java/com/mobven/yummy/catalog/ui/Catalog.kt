@@ -56,6 +56,7 @@ import com.mobven.designsystem.components.common.CardTwo
 import com.mobven.designsystem.components.common.SmallCardSix
 import com.mobven.designsystem.components.common.YummyBigCardPreview
 import com.mobven.designsystem.components.common.YummyCardTwoPreview
+import com.mobven.designsystem.components.search.SearchBarPreviewEmpty
 import com.mobven.designsystem.theme.additionalDark
 import com.mobven.designsystem.util.navigate
 
@@ -165,6 +166,13 @@ fun Catalog() {
                             price = "$7.02",
                             imgRes = R.drawable.chicken_noodle
                         )
+                    }
+                }
+
+                item { Text("Search Bar", Modifier.padding(top = 16.dp)) }
+                item {
+                    Column(verticalArrangement = Arrangement.spacedBy(16.dp)) {
+                        SearchBarPreviewEmpty()
                     }
                 }
             }
