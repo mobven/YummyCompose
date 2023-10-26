@@ -52,6 +52,8 @@ import com.mobven.designsystem.home.HomeScreen
 import com.mobven.designsystem.navbarnavigation.Route
 import com.mobven.designsystem.order.OrderScreen
 import com.mobven.designsystem.reward.RewardScreen
+import com.mobven.designsystem.components.search.SearchBarPreviewEmpty
+import com.mobven.designsystem.theme.additionalDark
 import com.mobven.designsystem.util.navigate
 
 @Composable
@@ -162,6 +164,13 @@ fun Catalog() {
                             price = "$7.02",
                             imgRes = R.drawable.chicken_noodle
                         )
+                    }
+                }
+
+                item { Text("Search Bar", Modifier.padding(top = 16.dp)) }
+                item {
+                    Column(verticalArrangement = Arrangement.spacedBy(16.dp)) {
+                        SearchBarPreviewEmpty()
                     }
                 }
 
