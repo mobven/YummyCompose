@@ -53,7 +53,6 @@ import com.mobven.designsystem.navbarnavigation.Route
 import com.mobven.designsystem.order.OrderScreen
 import com.mobven.designsystem.reward.RewardScreen
 import com.mobven.designsystem.components.search.SearchBarPreviewEmpty
-import com.mobven.designsystem.theme.additionalDark
 import com.mobven.designsystem.util.navigate
 
 @Composable
