@@ -127,6 +127,16 @@ val Typography.h5MediumStyle: TextStyle
         fontWeight = FontWeight.Medium,
     )
 val Typography.smallBoldStyle: TextStyle
+
+val Typography.h5NormalStyle: TextStyle
+    get() = TextStyle(
+        fontFamily = sfProFamily,
+        fontSize = 14.sp,
+        lineHeight = 20.sp,
+        fontWeight = FontWeight.Normal,
+    )
+
+val Typography.smallBoldStyle: TextStyle
     get() = TextStyle(
         fontFamily = sfProFamily,
         fontSize = 12.sp,
