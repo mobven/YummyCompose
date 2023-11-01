@@ -108,7 +108,9 @@ fun LoginScreen(
         VerticalSpacer(height = 32.dp)
 
         YummyButton(
-            text = "Sign in", modifier = Modifier
+            text = "Sign in",
+            isEnabled = phoneNumberState.isNotEmpty() && passwordState.isNotEmpty(),
+            modifier = Modifier
                 .fillMaxWidth()
                 .padding(horizontal = 24.dp)
         ) {

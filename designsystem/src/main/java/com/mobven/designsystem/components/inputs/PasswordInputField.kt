@@ -33,6 +33,7 @@ import com.mobven.designsystem.components.common.VerticalSpacer
 import com.mobven.designsystem.components.common.conditional
 import com.mobven.designsystem.theme.AdditionalGrey
 import com.mobven.designsystem.theme.NeutralGrayscale100
+import com.mobven.designsystem.theme.NeutralGrayscale60
 import com.mobven.designsystem.theme.NeutralGrayscale70
 import com.mobven.designsystem.theme.SemanticError
 import com.mobven.designsystem.theme.additionalWhite
@@ -65,7 +66,7 @@ fun PasswordInputField(
                 .fillMaxWidth()
                 .conditional(!isFocused && !isError){
                     border(
-                        1.dp, NeutralGrayscale70,
+                        1.dp, NeutralGrayscale60,
                         RoundedCornerShape(
                             topStart = 20.dp,
                             bottomStart = 16.dp,

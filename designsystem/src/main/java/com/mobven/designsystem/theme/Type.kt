@@ -126,7 +126,6 @@ val Typography.h5MediumStyle: TextStyle
         lineHeight = 20.sp,
         fontWeight = FontWeight.Medium,
     )
-val Typography.smallBoldStyle: TextStyle
 
 val Typography.h5NormalStyle: TextStyle
     get() = TextStyle(

@@ -22,6 +22,7 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.mobven.components.R
 import com.mobven.designsystem.components.common.YummyIcon
+import com.mobven.designsystem.theme.additionalDark
 import com.mobven.designsystem.theme.additionalWhite
 import com.mobven.designsystem.theme.h2BoldStyle
 import com.mobven.designsystem.theme.neutralGrayscale100
@@ -34,7 +35,7 @@ fun YummyToolbar(
     modifier: Modifier = Modifier,
     iconTint: Color = Color.Unspecified,
     backgroundColor: Color = MaterialTheme.colorScheme.additionalWhite,
-    elevation: Dp = 4.dp,
+    elevation: Dp = 15.dp,
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
     titleStyle: TextStyle = MaterialTheme.typography.h2BoldStyle
         .copy(color = MaterialTheme.colorScheme.neutralGrayscale100),
@@ -42,7 +43,12 @@ fun YummyToolbar(
 ) {
     Box(
         modifier = modifier
-            .shadow(elevation)
+            .shadow(
+                elevation,
+                spotColor = MaterialTheme
+                    .colorScheme
+                    .additionalDark.copy(alpha = 0.7f)
+            )
             .background(backgroundColor)
             .padding(top = 45.dp)
     ) {
@@ -50,7 +56,10 @@ fun YummyToolbar(
             painterRes = icon,
             modifier = Modifier
                 .padding(start = 24.dp)
-                .clickable(interactionSource = interactionSource, indication = LocalIndication.current) {
+                .clickable(
+                    interactionSource = interactionSource,
+                    indication = LocalIndication.current
+                ) {
                     onIconClick.invoke()
                 },
             tint = iconTint
