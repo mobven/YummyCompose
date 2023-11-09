@@ -5,4 +5,5 @@ object Route {
     const val FAVOURITE = "favourite"
     const val ORDER = "order"
     const val REWARD = "reward"
+    const val LOGIN = "login"
 }
