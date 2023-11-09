@@ -1,4 +1,4 @@
-package com.mobven.yummy.catalog.ui.screens.category
+package com.mobven.yummy.ui.screens.category
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -16,6 +16,7 @@ import androidx.compose.ui.unit.dp
 import com.mobven.components.R
 import com.mobven.designsystem.components.common.CategoryCard
 import com.mobven.designsystem.components.common.VerticalSpacer
+import com.mobven.designsystem.components.toolbar.YummyToolbar
 import com.mobven.designsystem.theme.additionalWhite
 
 @Composable
@@ -41,12 +42,12 @@ fun CategoryScreen(
             .fillMaxSize()
             .background(MaterialTheme.colorScheme.additionalWhite)
     ) {
-   /*     YummyToolbar(
+        YummyToolbar(
             title = "Category",
             icon = R.drawable.ic_arrow_left,
             onIconClick = onBackClick,
             modifier = Modifier.fillMaxWidth()
-        )*/
+        )
         VerticalSpacer(height = 24.dp)
         LazyVerticalGrid(
             columns = GridCells.Fixed(4),
