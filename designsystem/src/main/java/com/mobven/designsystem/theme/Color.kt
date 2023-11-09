@@ -39,7 +39,7 @@ internal val ColorScheme.semanticWarning: Color
     get() = SemanticWarning
 val ColorScheme.additionalDark: Color
     get() = AdditionalDark
-internal val ColorScheme.additionalWhite: Color
+val ColorScheme.additionalWhite: Color
     get() = AdditionalWhite
 internal val ColorScheme.additionalBeige: Color
     get() = AdditionalBeige
