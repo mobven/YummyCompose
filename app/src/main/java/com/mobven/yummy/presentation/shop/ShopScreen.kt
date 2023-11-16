@@ -7,7 +7,6 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -17,11 +16,11 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyListScope
 import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.Divider
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -36,19 +35,16 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import com.mobven.designsystem.components.buttons.LikeButton
 import com.mobven.designsystem.components.chip.LazyRowYummyChip
 import com.mobven.designsystem.components.common.CardOne
 import com.mobven.designsystem.components.common.YummyAsyncImage
 import com.mobven.designsystem.components.common.YummyBigCard
 import com.mobven.designsystem.components.common.YummyIcon
-import com.mobven.designsystem.theme.h1SemiBoldStyle
-import com.mobven.designsystem.theme.h2SemiBoldStyle
-import com.mobven.designsystem.theme.h5MediumStyle
-import com.mobven.designsystem.theme.h5SemiBoldStyle
-import com.mobven.designsystem.theme.mainSecondary
-import com.mobven.designsystem.theme.neutralGrayscale100
+import com.mobven.designsystem.components.text.YummyHead2SemiBoldText
+import com.mobven.designsystem.components.text.YummyHead5MediumText
+import com.mobven.designsystem.components.text.YummyHead5SemiBoldText
+import com.mobven.designsystem.components.text.YummyHeadText
 import com.mobven.designsystem.theme.neutralGrayscale60
 import com.mobven.designsystem.theme.neutralGrayscale80
 import com.mobven.designsystem.theme.neutralGrayscale90
@@ -174,12 +170,8 @@ private fun TopBanner(
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.SpaceBetween
         ) {
-            Text(
+            YummyHeadText(
                 text = restaurant.name,
-                style = MaterialTheme.typography.h1SemiBoldStyle.copy(
-                    fontSize = 32.sp
-                ),
-                color = MaterialTheme.colorScheme.neutralGrayscale100
             )
 
             LikeButton(
@@ -198,14 +190,11 @@ private fun TopBanner(
             horizontalArrangement = Arrangement.SpaceBetween
         ) {
             Column {
-                Text(
-                    text = restaurant.address,
-                    style = MaterialTheme.typography.h5MediumStyle,
-                    color = MaterialTheme.colorScheme.neutralGrayscale100
+                YummyHead5MediumText(
+                    text = restaurant.address
                 )
-                Text(
+                YummyHead5SemiBoldText(
                     text = "Opening",
-                    style = MaterialTheme.typography.h5SemiBoldStyle,
                     color = MaterialTheme.colorScheme.semanticSuccess,
                     modifier = Modifier
                         .padding(top = 4.dp)
@@ -232,16 +221,14 @@ private fun TopBanner(
                 modifier = Modifier
                     .size(16.dp)
             )
-            Text(
+            YummyHead5MediumText(
                 text = restaurant.rate,
-                style = MaterialTheme.typography.h5MediumStyle,
                 color = MaterialTheme.colorScheme.neutralGrayscale90,
                 modifier = Modifier
                     .padding(start = 2.dp)
             )
-            Text(
+            YummyHead5MediumText(
                 text = restaurant.votes,
-                style = MaterialTheme.typography.h5MediumStyle,
                 color = MaterialTheme.colorScheme.neutralGrayscale80,
                 modifier = Modifier
                     .padding(start = 4.dp)
@@ -254,9 +241,8 @@ private fun TopBanner(
                 tint = MaterialTheme.colorScheme.neutralGrayscale90
             )
 
-            Text(
+            YummyHead5MediumText(
                 text = restaurant.totalOrders,
-                style = MaterialTheme.typography.h5MediumStyle,
                 color = MaterialTheme.colorScheme.neutralGrayscale80,
                 modifier = Modifier
                     .padding(start = 2.dp)
@@ -264,12 +250,9 @@ private fun TopBanner(
 
             Spacer(modifier = Modifier.weight(1f))
 
-            Text(
+            YummyHead5SemiBoldText(
                 text = "Reviews",
-                style = MaterialTheme.typography.h5SemiBoldStyle.copy(
-                    textDecoration = TextDecoration.Underline,
-                ),
-                color = MaterialTheme.colorScheme.neutralGrayscale100,
+                textDecoration = TextDecoration.Underline,
                 modifier = Modifier.clickable {
                     reviewsPressed.invoke()
                 }
@@ -291,10 +274,10 @@ private fun LazyListScope.YummyShops(
     item {
         LazyRowYummyChip(
             chipList = chipList,
+            startPadding = horizontalPadding,
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(top = 24.dp)
-                .padding(start = horizontalPadding)
         ) {
             selectedChipItem.invoke(it)
         }
@@ -309,11 +292,8 @@ private fun LazyListScope.YummyShops(
                     navigateToAllRestaurant.invoke(selected)
                 }
         ) {
-            Text(
+            YummyHead2SemiBoldText(
                 text = selected,
-                style = MaterialTheme.typography.h2SemiBoldStyle.copy(
-                    color = MaterialTheme.colorScheme.mainSecondary
-                ),
                 modifier = Modifier
                     .weight(1f)
             )
@@ -326,14 +306,16 @@ private fun LazyListScope.YummyShops(
     }
 
     item {
+
+        val listCardOne = (0..6).toList()
+
         LazyRow(
             modifier = Modifier
-                .padding(
-                    top = 16.dp,
-                    start = horizontalPadding
-                )
+                .padding(top = 16.dp)
         ) {
-            items(6) {
+            items(listCardOne) {
+                val startPadding = if (listCardOne.firstOrNull() == it) horizontalPadding else 0.dp
+
                 CardOne(
                     title = "Pizza Hut",
                     imgResId = com.mobven.components.R.drawable.card_one_image,
@@ -343,18 +325,16 @@ private fun LazyListScope.YummyShops(
                     discountText = "%4 off your order",
                     isDiscountTextVisible = true,
                     isPromoVisible = true,
-                    paddingValues = PaddingValues(end = 14.dp)
+                    modifier = Modifier
+                        .padding(start = startPadding, end = 14.dp)
                 )
             }
         }
     }
 
     item {
-        Text(
+        YummyHead2SemiBoldText(
             text = "Phở",
-            style = MaterialTheme.typography.h2SemiBoldStyle.copy(
-                color = MaterialTheme.colorScheme.mainSecondary
-            ),
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(horizontal = horizontalPadding)
@@ -365,7 +345,9 @@ private fun LazyListScope.YummyShops(
         )
     }
 
-    items(6) {
+    val listRestaurant = (0..6).toList()
+
+    items(listRestaurant) {item ->
         Column {
             val restaurant = com.mobven.designsystem.components.common.Restaurant(
                 "Hamburger",
@@ -381,15 +363,18 @@ private fun LazyListScope.YummyShops(
                 Modifier
                     .fillMaxWidth()
                     .padding(horizontal = horizontalPadding)
+                    .padding(bottom = 16.dp)
             )
 
-            Divider(
-                color = MaterialTheme.colorScheme.neutralGrayscale60,
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(vertical = 16.dp)
-                    .height(1.dp)
-            )
+            if (item != listRestaurant.last()) {
+                Divider(
+                    color = MaterialTheme.colorScheme.neutralGrayscale60,
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(bottom = 16.dp)
+                        .height(1.dp)
+                )
+            }
         }
 
     }

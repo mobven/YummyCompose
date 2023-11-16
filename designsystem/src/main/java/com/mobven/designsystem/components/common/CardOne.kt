@@ -4,7 +4,6 @@ import androidx.annotation.DrawableRes
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -43,12 +42,11 @@ fun CardOne(
     discountText: String,
     isDiscountTextVisible: Boolean,
     isPromoVisible: Boolean,
-    paddingValues: PaddingValues = PaddingValues()
+    modifier: Modifier = Modifier
 ) {
     Card(
         shape = RoundedCornerShape(8.dp),
-        modifier = Modifier
-            .padding(paddingValues)
+        modifier = modifier
             .width(192.dp)
     ) {
         Column(
