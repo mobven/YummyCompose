@@ -8,20 +8,22 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Divider
+import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.mobven.components.R
 import com.mobven.designsystem.components.common.VerticalSpacer
 import com.mobven.designsystem.components.common.YummyImage
 import com.mobven.designsystem.components.text.KeyValueText
-import com.mobven.designsystem.components.text.LocationText
 import com.mobven.designsystem.components.text.ReadMoreClickableText
+import com.mobven.designsystem.components.text.TextWithIcon
 import com.mobven.designsystem.components.toolbar.YummyToolbar
 import com.mobven.designsystem.theme.additionalWhite
 import com.mobven.designsystem.theme.grayscale200
@@ -60,10 +62,17 @@ fun RestaurantInformationScreen(
 
             VerticalSpacer(height = 24.dp)
 
-            LocationText(
+            TextWithIcon(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .align(Alignment.Start)
+                    .align(Alignment.Start),
+                leadingIcon = {
+                    Icon(
+                        painterResource(id = R.drawable.ic_location),
+                        contentDescription = "Location icon"
+                    )
+                },
+                text = "NYC, Broadway ave 79"
             )
 
             VerticalSpacer(height = 32.dp)
