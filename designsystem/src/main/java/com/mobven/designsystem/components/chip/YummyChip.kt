@@ -7,6 +7,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -28,7 +29,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.mobven.designsystem.theme.additionalWhite
 import com.mobven.designsystem.theme.h4MediumStyle
@@ -85,7 +85,8 @@ fun YummyChip(
 fun LazyRowYummyChip(
     chipList: List<String>,
     modifier: Modifier = Modifier,
-    startPadding: Dp = 0.dp,
+    contentPadding: PaddingValues = PaddingValues(horizontal = 10.dp),
+    itemPadding: PaddingValues = PaddingValues(horizontal = 6.dp),
     selectedChipListener: (String) -> Unit = {}
 ) {
     var selectedChip by remember {
@@ -97,14 +98,13 @@ fun LazyRowYummyChip(
     LazyRow(
         modifier = modifier,
         state = listState,
+        contentPadding = contentPadding
     ) {
         itemsIndexed(chipList) { index, item ->
-            val paddingStart = if (chipList.firstOrNull() == item) startPadding else 0.dp
-
             YummyChip(
                 text = item,
                 checked = selectedChip == item,
-                modifier = Modifier.padding(start = paddingStart, end = 12.dp)
+                modifier = Modifier.padding(itemPadding)
             ) {
                 selectedChip = item
                 selectedChipListener.invoke(selectedChip)

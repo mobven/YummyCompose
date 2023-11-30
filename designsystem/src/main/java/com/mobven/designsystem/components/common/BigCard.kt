@@ -1,15 +1,20 @@
 package com.mobven.designsystem.components.common
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.BoxWithConstraints
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.Card
-import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontWeight
@@ -29,58 +34,55 @@ fun YummyBigCard(
     discount: Int = 0,
     modifier: Modifier
 ) {
-    Card(
-        shape = RoundedCornerShape(8.dp),
-        modifier = modifier,
-        elevation = CardDefaults.cardElevation(defaultElevation = 10.dp)
+    Column(
+        modifier = modifier.fillMaxWidth()
+            .clip(RoundedCornerShape(8.dp))
     ) {
-        Column(modifier = Modifier.fillMaxWidth()) {
-            BoxWithConstraints(modifier = Modifier.height(160.dp)) {
-                if (isPromoEnabled) {
-                    Column(
+        BoxWithConstraints(modifier = Modifier.height(160.dp)) {
+            if (isPromoEnabled) {
+                Column(
+                    modifier = Modifier
+                        .zIndex(1f)
+                        .padding(horizontal = 12.dp, vertical = 8.dp)
+                        .background(MaterialTheme.colorScheme.promoOrange),
+                ) {
+                    Text(
+                        text = "PROMO",
+                        color = Color.White,
+                        fontWeight = FontWeight.Bold,
                         modifier = Modifier
-                            .zIndex(1f)
-                            .padding(horizontal = 12.dp, vertical = 8.dp)
-                            .background(MaterialTheme.colorScheme.promoOrange),
-                    ) {
-                        Text(
-                            text = "PROMO",
-                            color = Color.White,
-                            fontWeight = FontWeight.Bold,
-                            modifier = Modifier
-                                .padding(horizontal = 8.dp, vertical = 4.dp)
-                        )
-                    }
-                }
-                YummyImage(
-                    imgResId = R.drawable.yummy_big_card, modifier = Modifier
-                        .height(144.dp)
-                        .fillMaxWidth(), contentScale = ContentScale.Crop
-                )
-                if (discount > 0) {
-                    Column(
-                        modifier = Modifier
-                            .zIndex(1f)
-                            .padding(end = 16.dp, top = 16.dp)
-                            .align(Alignment.BottomEnd)
-                            .background(
-                                MaterialTheme.colorScheme.mainSecondary,
-                                shape = RoundedCornerShape(16.dp)
-                            ),
-                    ) {
-                        Text(
-                            text = "$discount% off your order",
-                            color = Color.White,
-                            fontWeight = FontWeight.Bold,
-                            modifier = Modifier
-                                .padding(horizontal = 12.dp, vertical = 6.dp)
-                        )
-                    }
+                            .padding(horizontal = 8.dp, vertical = 4.dp)
+                    )
                 }
             }
-
-            YummyProductInfo(restaurant)
+            YummyImage(
+                imgResId = R.drawable.yummy_big_card, modifier = Modifier
+                    .height(144.dp)
+                    .fillMaxWidth(), contentScale = ContentScale.Crop
+            )
+            if (discount > 0) {
+                Column(
+                    modifier = Modifier
+                        .zIndex(1f)
+                        .padding(end = 16.dp, top = 16.dp)
+                        .align(Alignment.BottomEnd)
+                        .background(
+                            MaterialTheme.colorScheme.mainSecondary,
+                            shape = RoundedCornerShape(16.dp)
+                        ),
+                ) {
+                    Text(
+                        text = "$discount% off your order",
+                        color = Color.White,
+                        fontWeight = FontWeight.Bold,
+                        modifier = Modifier
+                            .padding(horizontal = 12.dp, vertical = 6.dp)
+                    )
+                }
+            }
         }
+
+        YummyProductInfo(restaurant)
     }
 }
 

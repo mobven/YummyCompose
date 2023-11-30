@@ -7,6 +7,7 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -18,7 +19,6 @@ import androidx.compose.foundation.lazy.LazyListScope
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.material3.Divider
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
@@ -41,11 +41,11 @@ import com.mobven.designsystem.components.common.CardOne
 import com.mobven.designsystem.components.common.YummyAsyncImage
 import com.mobven.designsystem.components.common.YummyBigCard
 import com.mobven.designsystem.components.common.YummyIcon
+import com.mobven.designsystem.components.lazy.itemsWithDivider
 import com.mobven.designsystem.components.text.YummyHead2SemiBoldText
 import com.mobven.designsystem.components.text.YummyHead5MediumText
 import com.mobven.designsystem.components.text.YummyHead5SemiBoldText
 import com.mobven.designsystem.components.text.YummyHeadText
-import com.mobven.designsystem.theme.neutralGrayscale60
 import com.mobven.designsystem.theme.neutralGrayscale80
 import com.mobven.designsystem.theme.neutralGrayscale90
 import com.mobven.designsystem.theme.semanticSuccess
@@ -274,7 +274,8 @@ private fun LazyListScope.YummyShops(
     item {
         LazyRowYummyChip(
             chipList = chipList,
-            startPadding = horizontalPadding,
+            contentPadding = PaddingValues(horizontal = 18.dp),
+            itemPadding = PaddingValues(horizontal = 6.dp),
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(top = 24.dp)
@@ -311,10 +312,10 @@ private fun LazyListScope.YummyShops(
 
         LazyRow(
             modifier = Modifier
-                .padding(top = 16.dp)
+                .padding(top = 16.dp),
+            contentPadding = PaddingValues(horizontal = 17.dp)
         ) {
             items(listCardOne) {
-                val startPadding = if (listCardOne.firstOrNull() == it) horizontalPadding else 0.dp
 
                 CardOne(
                     title = "Pizza Hut",
@@ -326,7 +327,7 @@ private fun LazyListScope.YummyShops(
                     isDiscountTextVisible = true,
                     isPromoVisible = true,
                     modifier = Modifier
-                        .padding(start = startPadding, end = 14.dp)
+                        .padding(horizontal = 7.dp)
                 )
             }
         }
@@ -347,36 +348,29 @@ private fun LazyListScope.YummyShops(
 
     val listRestaurant = (0..6).toList()
 
-    items(listRestaurant) {item ->
-        Column {
-            val restaurant = com.mobven.designsystem.components.common.Restaurant(
-                "Hamburger",
-                "1.5 km",
-                "4.8",
-                true,
-                "1.2k"
-            )
-            YummyBigCard(
-                true,
-                restaurant,
-                4,
-                Modifier
-                    .fillMaxWidth()
-                    .padding(horizontal = horizontalPadding)
-                    .padding(bottom = 16.dp)
-            )
-
-            if (item != listRestaurant.last()) {
-                Divider(
-                    color = MaterialTheme.colorScheme.neutralGrayscale60,
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(bottom = 16.dp)
-                        .height(1.dp)
-                )
-            }
-        }
-
+    itemsWithDivider(
+        items = listRestaurant,
+        dividerModifier = Modifier
+            .fillMaxWidth()
+            .padding(bottom = 16.dp)
+            .height(1.dp)
+    ) { _ ->
+        val restaurant = com.mobven.designsystem.components.common.Restaurant(
+            "Hamburger",
+            "1.5 km",
+            "4.8",
+            true,
+            "1.2k"
+        )
+        YummyBigCard(
+            true,
+            restaurant,
+            4,
+            Modifier
+                .fillMaxWidth()
+                .padding(horizontal = horizontalPadding)
+                .padding(bottom = 16.dp)
+        )
     }
 }
 
