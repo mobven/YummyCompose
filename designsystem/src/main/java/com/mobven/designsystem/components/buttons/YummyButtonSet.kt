@@ -46,7 +46,7 @@ fun YummyButton(
     Box(
         contentAlignment = Alignment.Center,
         modifier = modifier
-            .sizeIn(86.dp, 44.dp)
+            .sizeIn(86.dp, 48.dp)
             .clip(RoundedCornerShape(24.dp))
             .clickable { onClick() }
             .background(

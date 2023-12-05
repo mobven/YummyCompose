@@ -4,29 +4,37 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Surface
+import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.material3.Text
-import androidx.compose.material3.darkColorScheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
+import androidx.core.view.WindowCompat
+import com.mobven.yummy.ui.navigation.YummyNavHost
 import com.mobven.yummy.ui.theme.YummyComposeTheme
 
 class MainActivity : ComponentActivity() {
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         installSplashScreen()
+        WindowCompat.setDecorFitsSystemWindows(window, false)
         setContent {
             YummyComposeTheme {
-                // A surface container using the 'background' color from the theme
-                Surface(
-                    modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colorScheme.background
-                ) {
-                    Greeting("Android")
-                }
+
+                YummyNavHost(
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .navigationBarsPadding()
+                )
+
+                /* YummyBottomNavBar(
+                     modifier = Modifier.fillMaxWidth(),
+                     navController = navController,
+                     backStackEntryState = navController.currentBackStackEntryAsState()
+                 )*/
+
             }
         }
     }
