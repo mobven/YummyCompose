@@ -25,7 +25,11 @@ fun YummyNavHost(
         startDestination = Route.LOGIN
     ) {
         composable(Route.LOGIN) {
-            LoginScreen {}
+            LoginScreen({
+                        navController.popBackStack()
+            }, {
+                navController.navigate(Route.)
+            })
         }
         composable(Route.HOME) {
             HomeScreen(onNavigate = navController::navigate)

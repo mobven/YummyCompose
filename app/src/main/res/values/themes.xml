@@ -5,7 +5,7 @@
     
     <style name="Theme.Splash.Yummy" parent="Theme.SplashScreen">
         <item name="windowSplashScreenBackground">#FFF</item>
-        <item name="windowSplashScreenAnimatedIcon">@drawable/yummy_logo</item>
+        <item name="windowSplashScreenAnimatedIcon">@drawable/splash_logo_foreground</item>
         <item name="windowSplashScreenAnimationDuration">500</item>
         <item name="postSplashScreenTheme">@style/Theme.YummyCompose</item>
     </style>

@@ -44,7 +44,8 @@ import com.mobven.designsystem.theme.promoOrange
 
 @Composable
 fun LoginScreen(
-    onBackClick: () -> Unit
+    onBackClick: () -> Unit,
+    onSignUpClick: () -> Unit
 ) {
 
     var phoneNumberState by remember {
@@ -136,9 +137,7 @@ fun LoginScreen(
             modifier = Modifier
                 .fillMaxWidth()
                 .align(Alignment.CenterHorizontally)
-        ) {
-            //handle click event
-        }
+        , onSignUpClick)
     }
 }
 

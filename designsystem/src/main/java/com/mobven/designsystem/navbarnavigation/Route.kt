@@ -6,4 +6,5 @@ object Route {
     const val ORDER = "order"
     const val REWARD = "reward"
     const val LOGIN = "login"
+    const val REGISTER = "register"
 }

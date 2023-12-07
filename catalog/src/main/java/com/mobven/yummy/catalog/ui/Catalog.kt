@@ -42,7 +42,6 @@ import com.mobven.designsystem.components.buttons.YummySegmentedButtonPreview
 import com.mobven.designsystem.components.cards.PagerCardPreview
 import com.mobven.designsystem.components.common.CardOnePreview
 import com.mobven.designsystem.components.common.CardThreePreview
-import com.mobven.designsystem.components.common.CardTwo
 import com.mobven.designsystem.components.common.SmallCardSix
 import com.mobven.designsystem.components.common.YummyBigCardPreview
 import com.mobven.designsystem.components.common.YummyCardTwoPreview
