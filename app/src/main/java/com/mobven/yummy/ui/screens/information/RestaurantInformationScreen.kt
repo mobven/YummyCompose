@@ -95,7 +95,7 @@ fun RestaurantInformationScreen(
 
             ReadMoreClickableText(
                 text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua ut enim ad",
-                readMoreText = "See more..."
+                readMoreText = " See more..."
             )
 
             VerticalSpacer(height = 32.dp)
