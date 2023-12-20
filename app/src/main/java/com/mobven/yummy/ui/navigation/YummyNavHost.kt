@@ -13,6 +13,7 @@ import com.mobven.designsystem.order.OrderScreen
 import com.mobven.designsystem.reward.RewardScreen
 import com.mobven.designsystem.util.navigate
 import com.mobven.yummy.ui.screens.login.LoginScreen
+import com.mobven.yummy.ui.screens.onboarding.OnboardingScreen
 
 @Composable
 fun YummyNavHost(
@@ -38,6 +39,9 @@ fun YummyNavHost(
         }
         composable(Route.REWARD) {
             RewardScreen(onNavigate = navController::navigate)
+        }
+        composable(Route.ONBOARDING) {
+            OnboardingScreen(onNavigate = navController::navigate)
         }
     }
 }

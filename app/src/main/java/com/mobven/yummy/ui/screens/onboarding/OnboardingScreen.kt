@@ -1,3 +1,6 @@
+package com.mobven.yummy.ui.screens.onboarding
+
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -10,7 +13,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.systemBars
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.text.ClickableText
 import androidx.compose.material3.Divider
@@ -20,6 +22,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.SpanStyle
@@ -39,10 +42,12 @@ import com.mobven.designsystem.theme.h5MediumStyle
 import com.mobven.designsystem.theme.mainPrimary
 import com.mobven.designsystem.theme.neutralGrayscale50
 import com.mobven.designsystem.theme.neutralGrayscale70
+import com.mobven.designsystem.util.UiEvent
 
-@Preview(showBackground = true)
 @Composable
-fun Onboarding() {
+fun OnboardingScreen(
+    onNavigate: (UiEvent.Navigate) -> Unit
+) {
     MaterialTheme {
         Surface {
             val contentPadding = WindowInsets
@@ -52,33 +57,43 @@ fun Onboarding() {
 
             Column(modifier = Modifier.fillMaxSize())
             {
-                LazyColumn(
-                    modifier = Modifier.weight(1f)
-                ) {
-                    item {
-                        Box(
-                            modifier = Modifier
-                                .height(541.dp)
-                                .fillMaxWidth()
-                        ) {
-                            YummyImage(
-                                imgResId = R.drawable.bg_onboarding,
-                                modifier = Modifier
-                                    .matchParentSize(),
-                                contentScale = ContentScale.Crop
-                            )
 
-                            YummyImage(
-                                imgResId = R.drawable.ic_yummy_food,
-                                modifier = Modifier
-                                    .align(Alignment.Center)
-                                    .height(64.dp)
-                                    .fillMaxWidth(),
-                                contentScale = ContentScale.Fit
+                Box(
+                    modifier = Modifier
+                        .height(541.dp)
+                        .weight(1f)
+                ) {
+                    YummyImage(
+                        imgResId = R.drawable.bg_onboarding,
+                        modifier = Modifier
+                            .matchParentSize(),
+                        contentScale = ContentScale.Crop
+                    )
+
+                    Box(
+                        modifier = Modifier
+                            .matchParentSize()
+                            .background(
+                                brush = Brush.verticalGradient(
+                                    colors = listOf(Color.White.copy(alpha = 0f), Color.White),
+                                    startY = 0.5f
+                                )
                             )
-                        }
-                    }
+                    )
+
+                    YummyImage(
+                        imgResId = R.drawable.ic_yummy_food,
+                        modifier = Modifier
+                            .align(Alignment.Center)
+                            .height(64.dp)
+                            .fillMaxWidth(),
+                        contentScale = ContentScale.Fit
+                    )
+
                 }
+
+
+
 
 
                 LazyColumn(
@@ -88,7 +103,7 @@ fun Onboarding() {
                 ) {
                     item {
                         Column(verticalArrangement = Arrangement.spacedBy(16.dp)) {
-                            YummyButton(text = "Sign In", modifier = Modifier.fillMaxWidth()) {
+                            YummyButton(text = "Sign in", modifier = Modifier.fillMaxWidth()) {
 
                             }
                         }
@@ -104,7 +119,7 @@ fun Onboarding() {
                             Divider(
                                 color = MaterialTheme.colorScheme.neutralGrayscale50,
                                 modifier = Modifier
-                                    .width(130.dp)
+                                    .weight(1f)
                                     .padding(horizontal = 4.dp)
                                     .height(1.dp)
                             )
@@ -119,7 +134,7 @@ fun Onboarding() {
                             Divider(
                                 color = MaterialTheme.colorScheme.neutralGrayscale50,
                                 modifier = Modifier
-                                    .width(130.dp)
+                                    .weight(1f)
                                     .padding(horizontal = 4.dp)
                                     .height(1.dp)
                             )
@@ -131,7 +146,7 @@ fun Onboarding() {
                                 "Continue with Google",
                                 R.drawable.ic_google,
                                 modifier = Modifier.fillMaxWidth(),
-                                Color(0xFF5384EE)
+                                Color(0xFF5384EE),
                             ) {}
                             SocialMediaButton(
                                 "Continue with Facebook ",
@@ -197,11 +212,14 @@ fun SignUpText() {
         ClickableText(
             text = annotatedString,
             onClick = { offset ->
-                val clickedText = annotatedString.substring(offset, offset + "Sign up".length)
-                if (clickedText == "Sign up") {
-                    // Navigation to sign up page
-                }
+                //Handle click event
             }
         )
     }
+}
+
+@Preview
+@Composable
+fun OnboardingScreenPreview() {
+    OnboardingScreen {}
 }
