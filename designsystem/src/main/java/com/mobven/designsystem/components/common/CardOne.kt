@@ -18,7 +18,6 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -26,7 +25,6 @@ import androidx.compose.ui.zIndex
 import com.mobven.components.R
 import com.mobven.designsystem.theme.additionalWhite
 import com.mobven.designsystem.theme.h3BoldStyle
-import com.mobven.designsystem.theme.mainPrimary
 import com.mobven.designsystem.theme.mainSecondary
 import com.mobven.designsystem.theme.neutralGrayscale70
 import com.mobven.designsystem.theme.neutralGrayscale80
@@ -44,10 +42,12 @@ fun CardOne(
     discountText: String,
     isDiscountTextVisible: Boolean,
     isPromoVisible: Boolean,
+    modifier: Modifier = Modifier
 ) {
     Card(
         shape = RoundedCornerShape(8.dp),
-        modifier = Modifier.width(192.dp)
+        modifier = modifier
+            .width(192.dp)
     ) {
         Column(
             modifier = Modifier
