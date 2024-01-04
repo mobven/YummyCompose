@@ -10,6 +10,9 @@ import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.sp
 import com.mobven.designsystem.theme.h1SemiBoldStyle
 import com.mobven.designsystem.theme.h2SemiBoldStyle
+import com.mobven.designsystem.theme.h3SemiBoldStyle
+import com.mobven.designsystem.theme.h4MediumStyle
+import com.mobven.designsystem.theme.h4SemiBoldStyle
 import com.mobven.designsystem.theme.h5MediumStyle
 import com.mobven.designsystem.theme.h5SemiBoldStyle
 import com.mobven.designsystem.theme.mainSecondary
@@ -27,6 +30,62 @@ fun YummyHeadText(
         style = MaterialTheme.typography.h1SemiBoldStyle.copy(
             fontSize = textSize
         ),
+        color = color,
+        modifier = modifier
+    )
+}
+
+@Composable
+fun YummyHead1SemiBoldText(
+    text: String,
+    modifier: Modifier = Modifier,
+    color: Color = MaterialTheme.colorScheme.neutralGrayscale100,
+) {
+    Text(
+        text = text,
+        style = MaterialTheme.typography.h1SemiBoldStyle,
+        color = color,
+        modifier = modifier
+    )
+}
+
+@Composable
+fun YummyHead3SemiBoldText(
+    text: String,
+    modifier: Modifier = Modifier,
+    color: Color = MaterialTheme.colorScheme.neutralGrayscale100,
+) {
+    Text(
+        text = text,
+        style = MaterialTheme.typography.h3SemiBoldStyle,
+        color = color,
+        modifier = modifier
+    )
+}
+
+@Composable
+fun YummyHead4SemiBoldText(
+    text: String,
+    modifier: Modifier = Modifier,
+    color: Color = MaterialTheme.colorScheme.neutralGrayscale100,
+) {
+    Text(
+        text = text,
+        style = MaterialTheme.typography.h4SemiBoldStyle,
+        color = color,
+        modifier = modifier
+    )
+}
+
+@Composable
+fun YummyHead4MediumText(
+    text: String,
+    modifier: Modifier = Modifier,
+    color: Color = MaterialTheme.colorScheme.neutralGrayscale100,
+) {
+    Text(
+        text = text,
+        style = MaterialTheme.typography.h4MediumStyle,
         color = color,
         modifier = modifier
     )
