@@ -29,7 +29,8 @@ import com.mobven.designsystem.theme.h5NormalStyle
 fun SearchBar(
     text: String,
     onTextChange: (String) -> Unit,
-    hint: String
+    hint: String,
+    modifier: Modifier = Modifier
 ) {
 
     TextField(
@@ -37,7 +38,7 @@ fun SearchBar(
         onValueChange = { value ->
             onTextChange(value)
         },
-        modifier = Modifier
+        modifier = modifier
             .fillMaxWidth()
             .wrapContentHeight(),
         colors = TextFieldDefaults.textFieldColors(

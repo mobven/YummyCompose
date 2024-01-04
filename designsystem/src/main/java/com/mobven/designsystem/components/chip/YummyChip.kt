@@ -15,6 +15,9 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.lazy.rememberLazyListState
+import androidx.compose.foundation.lazy.staggeredgrid.LazyHorizontalStaggeredGrid
+import androidx.compose.foundation.lazy.staggeredgrid.StaggeredGridCells
+import androidx.compose.foundation.lazy.staggeredgrid.itemsIndexed
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -28,6 +31,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.mobven.designsystem.theme.additionalWhite
@@ -40,6 +44,7 @@ import kotlinx.coroutines.launch
 @Composable
 fun YummyChip(
     text: String,
+    style: TextStyle = MaterialTheme.typography.h4MediumStyle,
     modifier: Modifier = Modifier,
     checked: Boolean = false,
     clickListener: ((checked: Boolean) -> Unit)? = null
@@ -66,7 +71,7 @@ fun YummyChip(
     Text(
         text = text,
         color = textColor,
-        style = MaterialTheme.typography.h4MediumStyle,
+        style = style,
         modifier = modifier
             .clip(RoundedCornerShape(30.dp))
             .background(backgroundColor)
@@ -115,6 +120,45 @@ fun LazyRowYummyChip(
         }
     }
 }
+
+@Composable
+fun LazyHorizontalStaggeredYummyChip(
+    chipList: List<String>,
+    modifier: Modifier = Modifier,
+    style: TextStyle,
+    itemPadding: PaddingValues = PaddingValues(horizontal = 6.dp),
+    selectedChipListener: (String) -> Unit = {}
+) {
+    var selectedChip by remember {
+        mutableStateOf(chipList.firstOrNull().orEmpty())
+    }
+    val listState = rememberLazyListState()
+    val coroutineScope = rememberCoroutineScope()
+
+    LazyHorizontalStaggeredGrid(
+        rows = StaggeredGridCells.Adaptive(25.dp),
+        horizontalItemSpacing = 4.dp,
+        verticalArrangement = Arrangement.spacedBy(4.dp),
+        content = {
+            itemsIndexed(chipList) { index, item ->
+                YummyChip(
+                    text = item,
+                    style = style,
+                    checked = false,
+                    modifier = Modifier.padding(itemPadding)
+                ) {
+                    selectedChip = item
+                    selectedChipListener.invoke(selectedChip)
+                    coroutineScope.launch {
+                        listState.animateScrollToItem(index = index)
+                    }
+                }
+            }
+        },
+        modifier = modifier
+    )
+}
+
 
 @Preview
 @Composable

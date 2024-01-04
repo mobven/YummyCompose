@@ -84,6 +84,14 @@ val Typography.h3MediumStyle: TextStyle
         lineHeight = 28.sp,
         fontWeight = FontWeight.Medium,
     )
+
+val Typography.h3NormalStyle: TextStyle
+    get() = TextStyle(
+        fontFamily = sfProFamily,
+        fontSize = 18.sp,
+        lineHeight = 28.sp,
+        fontWeight = FontWeight.Normal,
+    )
 val Typography.h4BoldStyle: TextStyle
     get() = TextStyle(
         fontFamily = sfProFamily,
