@@ -27,6 +27,7 @@ import com.mobven.designsystem.theme.h5NormalStyle
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun SearchBar(
+    modifier: Modifier = Modifier,
     text: String,
     onTextChange: (String) -> Unit,
     hint: String
@@ -37,7 +38,7 @@ fun SearchBar(
         onValueChange = { value ->
             onTextChange(value)
         },
-        modifier = Modifier
+        modifier = modifier
             .fillMaxWidth()
             .wrapContentHeight(),
         colors = TextFieldDefaults.textFieldColors(
