@@ -14,8 +14,6 @@ import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.material.Chip
-import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -89,12 +87,13 @@ fun YummyCircleChip(
 fun LazyRowYummyCircleChip(
     chipList: List<String>,
     modifier: Modifier = Modifier,
-    contentPadding: PaddingValues = PaddingValues(horizontal = 10.dp),
+    defaultSelectedChip: String? = null,
+    contentPadding: PaddingValues = PaddingValues(horizontal = 0.dp),
     itemPadding: PaddingValues = PaddingValues(horizontal = 6.dp),
     selectedChipListener: (String) -> Unit = {}
 ) {
     var selectedChip by remember {
-        mutableStateOf(chipList.firstOrNull().orEmpty())
+        mutableStateOf(defaultSelectedChip)
     }
     val listState = rememberLazyListState()
     val coroutineScope = rememberCoroutineScope()
@@ -111,7 +110,7 @@ fun LazyRowYummyCircleChip(
                 modifier = Modifier.padding(itemPadding)
             ) {
                 selectedChip = item
-                selectedChipListener.invoke(selectedChip)
+                selectedChipListener.invoke(selectedChip.orEmpty())
                 coroutineScope.launch {
                     listState.animateScrollToItem(index = index)
                 }

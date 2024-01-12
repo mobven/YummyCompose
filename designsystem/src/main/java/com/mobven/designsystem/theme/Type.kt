@@ -1,6 +1,7 @@
 package com.mobven.designsystem.theme
 
 import androidx.compose.material3.Typography
+import androidx.compose.ui.text.PlatformTextStyle
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
@@ -15,7 +16,7 @@ val sfProFamily = FontFamily(
     Font(R.font.sf_pro_light_italic, FontWeight.Light, FontStyle.Italic),
     Font(R.font.sf_pro_medium, FontWeight.Medium),
     Font(R.font.sf_pro_regular, FontWeight.Normal),
-    Font(R.font.sf_pro_regular, FontWeight.SemiBold),
+    Font(R.font.sf_pro_semibold, FontWeight.SemiBold),
     Font(R.font.sf_pro_semibold_italic, FontWeight.SemiBold, FontStyle.Italic),
     Font(R.font.sf_pro_thin_italic, FontWeight.Thin, FontStyle.Italic),
     Font(R.font.sf_pro_ultra_light_italic, FontWeight.ExtraLight, FontStyle.Italic)
@@ -27,6 +28,7 @@ val Typography.h1BoldStyle: TextStyle
         fontSize = 24.sp,
         lineHeight = 36.sp,
         fontWeight = FontWeight.Bold,
+        platformStyle = PlatformTextStyle(includeFontPadding = false)
     )
 val Typography.h1SemiBoldStyle: TextStyle
     get() = TextStyle(
@@ -34,6 +36,7 @@ val Typography.h1SemiBoldStyle: TextStyle
         fontSize = 24.sp,
         lineHeight = 36.sp,
         fontWeight = FontWeight.SemiBold,
+        platformStyle = PlatformTextStyle(includeFontPadding = false)
     )
 val Typography.h1MediumStyle: TextStyle
     get() = TextStyle(
@@ -41,6 +44,7 @@ val Typography.h1MediumStyle: TextStyle
         fontSize = 24.sp,
         lineHeight = 36.sp,
         fontWeight = FontWeight.Medium,
+        platformStyle = PlatformTextStyle(includeFontPadding = false)
     )
 val Typography.h2BoldStyle: TextStyle
     get() = TextStyle(
@@ -48,6 +52,7 @@ val Typography.h2BoldStyle: TextStyle
         fontSize = 20.sp,
         lineHeight = 32.sp,
         fontWeight = FontWeight.Bold,
+        platformStyle = PlatformTextStyle(includeFontPadding = false)
     )
 val Typography.h2SemiBoldStyle: TextStyle
     get() = TextStyle(
@@ -55,6 +60,7 @@ val Typography.h2SemiBoldStyle: TextStyle
         fontSize = 20.sp,
         lineHeight = 32.sp,
         fontWeight = FontWeight.SemiBold,
+        platformStyle = PlatformTextStyle(includeFontPadding = false)
     )
 val Typography.h2MediumStyle: TextStyle
     get() = TextStyle(
@@ -62,6 +68,7 @@ val Typography.h2MediumStyle: TextStyle
         fontSize = 20.sp,
         lineHeight = 32.sp,
         fontWeight = FontWeight.Medium,
+        platformStyle = PlatformTextStyle(includeFontPadding = false)
     )
 val Typography.h3BoldStyle: TextStyle
     get() = TextStyle(
@@ -69,6 +76,7 @@ val Typography.h3BoldStyle: TextStyle
         fontSize = 18.sp,
         lineHeight = 28.sp,
         fontWeight = FontWeight.Bold,
+        platformStyle = PlatformTextStyle(includeFontPadding = false)
     )
 val Typography.h3SemiBoldStyle: TextStyle
     get() = TextStyle(
@@ -76,6 +84,7 @@ val Typography.h3SemiBoldStyle: TextStyle
         fontSize = 18.sp,
         lineHeight = 28.sp,
         fontWeight = FontWeight.SemiBold,
+        platformStyle = PlatformTextStyle(includeFontPadding = false)
     )
 val Typography.h3MediumStyle: TextStyle
     get() = TextStyle(
@@ -83,6 +92,7 @@ val Typography.h3MediumStyle: TextStyle
         fontSize = 18.sp,
         lineHeight = 28.sp,
         fontWeight = FontWeight.Medium,
+        platformStyle = PlatformTextStyle(includeFontPadding = false)
     )
 val Typography.h4BoldStyle: TextStyle
     get() = TextStyle(
@@ -90,6 +100,7 @@ val Typography.h4BoldStyle: TextStyle
         fontSize = 16.sp,
         lineHeight = 24.sp,
         fontWeight = FontWeight.Bold,
+        platformStyle = PlatformTextStyle(includeFontPadding = false)
     )
 val Typography.h4SemiBoldStyle: TextStyle
     get() = TextStyle(
@@ -97,6 +108,7 @@ val Typography.h4SemiBoldStyle: TextStyle
         fontSize = 16.sp,
         lineHeight = 24.sp,
         fontWeight = FontWeight.SemiBold,
+        platformStyle = PlatformTextStyle(includeFontPadding = false)
     )
 val Typography.h4MediumStyle: TextStyle
     get() = TextStyle(
@@ -104,6 +116,7 @@ val Typography.h4MediumStyle: TextStyle
         fontSize = 16.sp,
         lineHeight = 24.sp,
         fontWeight = FontWeight.Medium,
+        platformStyle = PlatformTextStyle(includeFontPadding = false)
     )
 val Typography.h5BoldStyle: TextStyle
     get() = TextStyle(
@@ -111,6 +124,7 @@ val Typography.h5BoldStyle: TextStyle
         fontSize = 14.sp,
         lineHeight = 20.sp,
         fontWeight = FontWeight.Bold,
+        platformStyle = PlatformTextStyle(includeFontPadding = false)
     )
 val Typography.h5SemiBoldStyle: TextStyle
     get() = TextStyle(
@@ -118,6 +132,7 @@ val Typography.h5SemiBoldStyle: TextStyle
         fontSize = 14.sp,
         lineHeight = 20.sp,
         fontWeight = FontWeight.SemiBold,
+        platformStyle = PlatformTextStyle(includeFontPadding = false)
     )
 val Typography.h5MediumStyle: TextStyle
     get() = TextStyle(
@@ -125,6 +140,7 @@ val Typography.h5MediumStyle: TextStyle
         fontSize = 14.sp,
         lineHeight = 20.sp,
         fontWeight = FontWeight.Medium,
+        platformStyle = PlatformTextStyle(includeFontPadding = false)
     )
 
 val Typography.h5NormalStyle: TextStyle
@@ -133,6 +149,7 @@ val Typography.h5NormalStyle: TextStyle
         fontSize = 14.sp,
         lineHeight = 20.sp,
         fontWeight = FontWeight.Normal,
+        platformStyle = PlatformTextStyle(includeFontPadding = false)
     )
 
 val Typography.smallBoldStyle: TextStyle
@@ -141,6 +158,7 @@ val Typography.smallBoldStyle: TextStyle
         fontSize = 12.sp,
         lineHeight = 16.sp,
         fontWeight = FontWeight.Bold,
+        platformStyle = PlatformTextStyle(includeFontPadding = false)
     )
 val Typography.smallSemiBoldStyle: TextStyle
     get() = TextStyle(
@@ -148,6 +166,7 @@ val Typography.smallSemiBoldStyle: TextStyle
         fontSize = 12.sp,
         lineHeight = 16.sp,
         fontWeight = FontWeight.SemiBold,
+        platformStyle = PlatformTextStyle(includeFontPadding = false)
     )
 val Typography.smallMediumStyle: TextStyle
     get() = TextStyle(
@@ -155,6 +174,7 @@ val Typography.smallMediumStyle: TextStyle
         fontSize = 12.sp,
         lineHeight = 16.sp,
         fontWeight = FontWeight.Medium,
+        platformStyle = PlatformTextStyle(includeFontPadding = false)
     )
 val Typography.xsmallBoldStyle: TextStyle
     get() = TextStyle(
@@ -162,6 +182,7 @@ val Typography.xsmallBoldStyle: TextStyle
         fontSize = 10.sp,
         lineHeight = 16.sp,
         fontWeight = FontWeight.Bold,
+        platformStyle = PlatformTextStyle(includeFontPadding = false)
     )
 val Typography.xsmallSemiBoldStyle: TextStyle
     get() = TextStyle(
@@ -169,6 +190,7 @@ val Typography.xsmallSemiBoldStyle: TextStyle
         fontSize = 10.sp,
         lineHeight = 16.sp,
         fontWeight = FontWeight.SemiBold,
+        platformStyle = PlatformTextStyle(includeFontPadding = false)
     )
 val Typography.xsmallMediumStyle: TextStyle
     get() = TextStyle(
@@ -176,4 +198,5 @@ val Typography.xsmallMediumStyle: TextStyle
         fontSize = 10.sp,
         lineHeight = 16.sp,
         fontWeight = FontWeight.Medium,
+        platformStyle = PlatformTextStyle(includeFontPadding = false)
     )

@@ -11,7 +11,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material3.Divider
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
@@ -40,12 +39,14 @@ import com.mobven.designsystem.components.text.YummyHead3SemiBoldText
 import com.mobven.designsystem.components.text.YummyHead4MediumText
 import com.mobven.designsystem.components.text.YummyHead4SemiBoldText
 import com.mobven.designsystem.components.toolbar.YummyToolbar
+import com.mobven.designsystem.theme.h4MediumStyle
 import com.mobven.designsystem.theme.mainPrimary
 import com.mobven.designsystem.theme.neutralGrayscale50
+import com.mobven.designsystem.theme.neutralGrayscale70
 import com.mobven.designsystem.theme.neutralGrayscale90
+import com.mobven.designsystem.util.yummyPadding
 import com.mobven.yummy.R
 
-@OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun OptionScreen() {
     LazyColumn(
@@ -65,9 +66,8 @@ fun OptionScreen() {
                 Row(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .padding(
-                            start = 24.dp,
-                            end = 24.dp,
+                        .yummyPadding(
+                            horizontal = 24.dp,
                             top = 16.dp
                         ),
                     verticalAlignment = Alignment.CenterVertically,
@@ -85,19 +85,23 @@ fun OptionScreen() {
                 ReadMoreClickableText(
                     text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Tortor ac leo lorem nisl. Viverra vulputate sodales quis et dui, lacus. Iaculis eu egestas egestas vulputate sodales quis et dui, lacus. Iaculis eu egestas egestas , lacus. Iaculis eu egestas egestas ",
                     readMoreText = " Read More",
+                    textStyle = MaterialTheme.typography.h4MediumStyle.copy(
+                        color = MaterialTheme.colorScheme.neutralGrayscale70
+                    ),
                     minimizedMaxLines = 3,
                     modifier = Modifier
                         .fillMaxWidth()
-                        .padding(horizontal = 24.dp)
-                        .padding(top = 12.dp)
+                        .yummyPadding(
+                            horizontal = 24.dp,
+                            top = 12.dp
+                        )
                 )
 
                 Row(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .padding(
-                            start = 24.dp,
-                            end = 24.dp,
+                        .yummyPadding(
+                            horizontal = 24.dp,
                             top = 40.dp
                         ),
                     verticalAlignment = Alignment.CenterVertically,
@@ -130,9 +134,8 @@ fun OptionScreen() {
                 Row(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .padding(
-                            start = 24.dp,
-                            end = 24.dp,
+                        .yummyPadding(
+                            horizontal = 24.dp,
                             top = 16.dp
                         ),
                     verticalAlignment = Alignment.CenterVertically,
@@ -158,9 +161,8 @@ fun OptionScreen() {
                 YummyHead4SemiBoldText(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .padding(
-                            start = 24.dp,
-                            end = 24.dp,
+                        .yummyPadding(
+                            horizontal = 24.dp,
                             top = 16.dp
                         ),
                     text = "Notes"
@@ -175,8 +177,10 @@ fun OptionScreen() {
                     hint = "Do you have something to say to the restaurant? Are not ?",
                     onValueChanged = { noteText = it },
                     modifier = Modifier
-                        .padding(horizontal = 24.dp)
-                        .padding(top = 16.dp)
+                        .yummyPadding(
+                            horizontal = 24.dp,
+                            top = 16.dp
+                        )
                 )
 
 
@@ -184,8 +188,8 @@ fun OptionScreen() {
                     text = "Add to Cart - $23",
                     modifier = Modifier
                         .fillMaxWidth()
-                        .padding(horizontal = 24.dp)
-                        .padding(
+                        .yummyPadding(
+                            horizontal = 24.dp,
                             top = 24.dp,
                             bottom = 8.dp
                         )
@@ -208,9 +212,8 @@ fun TopingColumn(
         YummyHead4SemiBoldText(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(
-                    start = 24.dp,
-                    end = 24.dp
+                .yummyPadding(
+                    horizontal = 24.dp
                 ),
             text = "Toping"
         )
@@ -222,7 +225,9 @@ fun TopingColumn(
         CounterTextRow(
             counterValue = counterValueMushroom,
             centerText = "Mushroom",
-            endText = "3.00$"
+            endText = "3.00$",
+            modifier = Modifier
+                .padding(top = 16.dp)
         ) {
             counterValueMushroom = if (it >= 0) it else 0
         }
@@ -271,17 +276,18 @@ fun TopingColumn(
 @Composable
 fun CounterTextRow(
     counterValue: Int,
+    modifier: Modifier = Modifier,
     centerText: String = "",
     endText: String = "",
     type: CounterTextRowType = CounterTextRowType.CounterButton(CounterButtonType.BIG),
-    modifier: Modifier = Modifier,
     onCounterChanged: (Int) -> Unit
 ) {
     Column(
-        modifier = modifier
+        modifier = Modifier
             .fillMaxWidth()
+            .then(modifier)
             .padding(
-                top = 16.dp
+                top = 12.dp
             )
 
     ) {
@@ -291,8 +297,7 @@ fun CounterTextRow(
                 .padding(
                     horizontal = 24.dp
                 ),
-            verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.SpaceBetween
+            verticalAlignment = Alignment.CenterVertically
         ) {
 
             when (type) {
@@ -334,7 +339,7 @@ fun CounterTextRow(
             color = MaterialTheme.colorScheme.neutralGrayscale50,
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(top = 16.dp)
+                .padding(top = 12.dp)
         )
     }
 }

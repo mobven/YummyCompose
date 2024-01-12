@@ -17,6 +17,7 @@ import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.geometry.Rect
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.text.TextLayoutResult
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.IntSize
 import com.mobven.designsystem.theme.h4MediumStyle
@@ -26,8 +27,9 @@ import com.mobven.designsystem.theme.mainPrimary
 fun ReadMoreClickableText(
     text: String,
     readMoreText: String,
-    minimizedMaxLines: Int = 2,
     modifier: Modifier = Modifier,
+    textStyle: TextStyle = MaterialTheme.typography.h4MediumStyle,
+    minimizedMaxLines: Int = 2,
 ) {
     var cutText by remember(text) { mutableStateOf<String?>(null) }
     var expanded by remember { mutableStateOf(false) }
@@ -61,7 +63,7 @@ fun ReadMoreClickableText(
     Box(modifier) {
         Text(
             text = cutText ?: text,
-            style = MaterialTheme.typography.h4MediumStyle,
+            style = textStyle,
             maxLines = if (expanded) Int.MAX_VALUE else minimizedMaxLines,
             overflow = TextOverflow.Ellipsis,
             onTextLayout = { textLayoutResultState.value = it },
