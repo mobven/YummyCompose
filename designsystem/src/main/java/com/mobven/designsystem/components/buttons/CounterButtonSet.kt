@@ -1,13 +1,12 @@
 package com.mobven.designsystem.components.buttons
 
 import androidx.compose.animation.AnimatedContent
-import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.animation.SizeTransform
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
 import androidx.compose.animation.slideInVertically
 import androidx.compose.animation.slideOutVertically
-import androidx.compose.animation.with
+import androidx.compose.animation.togetherWith
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -22,7 +21,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
@@ -59,17 +58,17 @@ fun CircularCounterButton(
     }
 }
 
-@OptIn(ExperimentalAnimationApi::class)
 @Composable
 fun CounterButton(
     type: CounterButtonType,
     counterValue: Int,
+    modifier: Modifier = Modifier,
     onCounterChanged: (Int) -> Unit
 ) {
     Row(
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.SpaceBetween,
-        modifier = Modifier
+        modifier = modifier
             .size(
                 if (type == CounterButtonType.NORMAL) DpSize(96.dp, 32.dp)
                 else DpSize(112.dp, 40.dp)
@@ -93,10 +92,10 @@ fun CounterButton(
             contentAlignment = Alignment.Center,
             transitionSpec = {
                 if (targetState > initialState) {
-                    slideInVertically { height -> height } + fadeIn() with
+                    slideInVertically { height -> height } + fadeIn() togetherWith
                             slideOutVertically { height -> -height } + fadeOut()
                 } else {
-                    slideInVertically { height -> -height } + fadeIn() with
+                    slideInVertically { height -> -height } + fadeIn() togetherWith
                             slideOutVertically { height -> height } + fadeOut()
                 }.using(
                     SizeTransform(clip = false)
@@ -137,7 +136,7 @@ fun TinyCounterButtonPreview() {
 @Composable
 fun CounterButtonPreview() {
     var counterValue by remember {
-        mutableStateOf(0)
+        mutableIntStateOf(0)
     }
     CounterButton(type = CounterButtonType.BIG, counterValue) {
         counterValue = if (it >= 0) it else 0
