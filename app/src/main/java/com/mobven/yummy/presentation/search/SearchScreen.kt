@@ -4,7 +4,6 @@ import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -120,18 +119,19 @@ fun SearchScreen(
             }
 
             AnimatedVisibility(visible = textState.isNullOrEmpty()) {
-                Column {
+                Column(
+                    modifier = Modifier.padding(top = 6.dp)
+                ) {
                     item.forEach {
                         Text(
                             text = it.title,
                             style = MaterialTheme.typography.h3BoldStyle,
-                            modifier = Modifier.padding(24.dp, 24.dp, 24.dp, 16.dp)
+                            modifier = Modifier.padding(24.dp, 24.dp, 18.dp, 8.dp)
                         )
                         LazyHorizontalStaggeredYummyChip(
                             chipList = it.chipList,
                             modifier = Modifier
                                 .fillMaxWidth()
-                                .height(64.dp)
                                 .padding(horizontal = 17.dp),
                             style = MaterialTheme.typography.h5NormalStyle
                         ) {
