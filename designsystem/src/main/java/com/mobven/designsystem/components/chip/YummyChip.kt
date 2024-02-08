@@ -6,7 +6,10 @@ import androidx.compose.animation.core.tween
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.ExperimentalLayoutApi
+import androidx.compose.foundation.layout.FlowRow
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -28,10 +31,12 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.mobven.designsystem.theme.additionalWhite
 import com.mobven.designsystem.theme.h4MediumStyle
+import com.mobven.designsystem.theme.h5NormalStyle
 import com.mobven.designsystem.theme.mainSecondary
 import com.mobven.designsystem.theme.neutralGrayscale30
 import com.mobven.designsystem.theme.neutralGrayscale90
@@ -40,6 +45,7 @@ import kotlinx.coroutines.launch
 @Composable
 fun YummyChip(
     text: String,
+    style: TextStyle = MaterialTheme.typography.h4MediumStyle,
     modifier: Modifier = Modifier,
     checked: Boolean = false,
     clickListener: ((checked: Boolean) -> Unit)? = null
@@ -66,7 +72,8 @@ fun YummyChip(
     Text(
         text = text,
         color = textColor,
-        style = MaterialTheme.typography.h4MediumStyle,
+        style = style,
+        maxLines = 1,
         modifier = modifier
             .clip(RoundedCornerShape(30.dp))
             .background(backgroundColor)
@@ -115,6 +122,68 @@ fun LazyRowYummyChip(
         }
     }
 }
+
+@OptIn(ExperimentalLayoutApi::class)
+@Composable
+fun LazyHorizontalStaggeredYummyChip(
+    chipList: List<String>,
+    modifier: Modifier = Modifier,
+    style: TextStyle,
+    itemModifier: Modifier = Modifier
+        .padding(horizontal = 6.dp, vertical = 8.dp),
+    selectedChipListener: (String) -> Unit = {}
+) {
+    var selectedChip by remember {
+        mutableStateOf(chipList.firstOrNull().orEmpty())
+    }
+    val listState = rememberLazyListState()
+    val coroutineScope = rememberCoroutineScope()
+
+    FlowRow(
+        modifier = modifier,
+    ) {
+        chipList.forEachIndexed { index, item ->
+            YummyChip(
+                text = item,
+                style = style,
+                checked = false,
+                modifier = itemModifier
+            ) {
+                selectedChip = item
+                selectedChipListener.invoke(selectedChip)
+                coroutineScope.launch {
+                    listState.animateScrollToItem(index = index)
+                }
+            }
+        }
+    }
+}
+
+
+@Preview
+@Composable
+fun LazyHorizontalStaggeredYummyChipPreview() {
+    MaterialTheme {
+        Box(modifier = Modifier.background(Color.White)) {
+            LazyHorizontalStaggeredYummyChip(
+                chipList = listOf(
+                    "Pizza",
+                    "Hamburger",
+                    "Meat bread",
+                    "Sushi",
+                    "Donuts",
+                    "Remen"
+                ),
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(horizontal = 17.dp),
+                style = MaterialTheme.typography.h5NormalStyle
+            ) {
+            }
+        }
+    }
+}
+
 
 @Preview
 @Composable
