@@ -26,6 +26,7 @@ val Grayscale200 = Color(0xFFEEEEEE)
 val Grayscale600 = Color(0xFF757575)
 val PromoOrange = Color(0xFFF24822)
 val GrayScale = Color(0xFF212121)
+val Alert = Color(0xFFF75555)
 
 val ColorScheme.promoOrange: Color
     get() = PromoOrange
@@ -73,3 +74,5 @@ val ColorScheme.grayscale200: Color
     get() = Grayscale200
 val ColorScheme.grayscale600: Color
     get() = Grayscale600
+val ColorScheme.alert: Color
+    get() = Alert
