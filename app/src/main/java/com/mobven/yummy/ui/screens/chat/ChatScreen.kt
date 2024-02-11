@@ -4,16 +4,16 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ColumnScope
+import androidx.compose.foundation.layout.ExperimentalLayoutApi
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.imeNestedScroll
 import androidx.compose.foundation.layout.imePadding
+import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.LazyItemScope
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.MaterialTheme
@@ -58,9 +58,7 @@ fun ChatScreen() {
     }
 
     Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .background(MaterialTheme.colorScheme.background)
+        modifier = Modifier.background(MaterialTheme.colorScheme.background)
     ) {
         Header()
         Body(messages)
@@ -95,6 +93,7 @@ private fun Header() {
     )
 }
 
+@OptIn(ExperimentalLayoutApi::class)
 @Composable
 private fun ColumnScope.Body(
     messages: List<String>
@@ -102,7 +101,9 @@ private fun ColumnScope.Body(
     LazyColumn(
         contentPadding = PaddingValues(top = 24.dp, start = 24.dp, end = 24.dp),
         verticalArrangement = Arrangement.spacedBy(24.dp),
-        modifier = Modifier.weight(1f)
+        modifier = Modifier
+            .weight(1f)
+            .imeNestedScroll()
     ) {
         itemsIndexed(messages) { index, message ->
             MessageItem(message, index % 2 == 0)
@@ -111,7 +112,7 @@ private fun ColumnScope.Body(
 }
 
 @Composable
-fun LazyItemScope.MessageItem(
+fun MessageItem(
     message: String,
     isIncomingMessage: Boolean
 ) {
@@ -179,6 +180,8 @@ private fun Footer(
         verticalAlignment = Alignment.CenterVertically,
         modifier = Modifier
             .fillMaxWidth()
+            .imePadding()
+            .navigationBarsPadding()
             .padding(bottom = 20.dp, start = 22.dp, end = 26.dp)
     ) {
 
@@ -201,7 +204,10 @@ private fun Footer(
             onValueChange = {
                 message = it
             },
-            onSendClicked = onSendClicked
+            onSendClicked = {
+                message = ""
+                onSendClicked.invoke(it)
+            }
         )
     }
 }

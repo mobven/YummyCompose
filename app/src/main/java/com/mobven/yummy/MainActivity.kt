@@ -11,6 +11,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.core.view.WindowCompat
 import com.mobven.yummy.ui.navigation.YummyNavHost
+import com.mobven.yummy.ui.screens.chat.ChatScreen
 import com.mobven.yummy.ui.theme.YummyComposeTheme
 
 class MainActivity : ComponentActivity() {
@@ -21,11 +22,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             YummyComposeTheme {
 
-                YummyNavHost(
-                    modifier = Modifier
-                        .fillMaxSize()
-                        .navigationBarsPadding()
-                )
+                ChatScreen()
 
                 /* YummyBottomNavBar(
                      modifier = Modifier.fillMaxWidth(),
