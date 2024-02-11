@@ -27,6 +27,7 @@ import com.mobven.components.R
 import com.mobven.designsystem.components.buttons.SocialMediaButton
 import com.mobven.designsystem.components.buttons.YummyButton
 import com.mobven.designsystem.components.common.VerticalSpacer
+import com.mobven.designsystem.components.common.YummyIcon
 import com.mobven.designsystem.components.inputs.PasswordInputField
 import com.mobven.designsystem.components.inputs.PhoneNumberField
 import com.mobven.designsystem.components.toolbar.YummyToolbar
@@ -34,6 +35,7 @@ import com.mobven.designsystem.theme.additionalDark
 import com.mobven.designsystem.theme.additionalWhite
 import com.mobven.designsystem.theme.grayscale200
 import com.mobven.designsystem.theme.grayscale600
+import com.mobven.designsystem.theme.h2BoldStyle
 import com.mobven.designsystem.theme.h4BoldStyle
 import com.mobven.designsystem.theme.h4MediumStyle
 import com.mobven.designsystem.theme.h5BoldStyle
@@ -63,9 +65,18 @@ fun LoginScreen(
     ) {
 
         YummyToolbar(
-            title = "Sign in",
-            icon = R.drawable.ic_arrow_left,
-            onIconClick = onBackClick,
+            title = {
+                Text(
+                    text = "Sign in", style = MaterialTheme.typography.h2BoldStyle
+                        .copy(color = MaterialTheme.colorScheme.neutralGrayscale100)
+                )
+            },
+            leadingIcon = {
+                YummyIcon(
+                    painterRes = R.drawable.ic_arrow_left,
+                    modifier = Modifier.clickable(onClick = onBackClick)
+                )
+            },
             modifier = Modifier.fillMaxWidth()
         )
 

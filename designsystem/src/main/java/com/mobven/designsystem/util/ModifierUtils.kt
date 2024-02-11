@@ -16,8 +16,8 @@ fun Modifier.yummyPadding(
 ) = this.then(
     Modifier.padding(
         start = horizontal ?: start,
-        top = horizontal ?: end,
-        end = vertical ?: top,
+        top = vertical ?: top,
+        end = horizontal ?: end,
         bottom = vertical ?: bottom
     )
 )
