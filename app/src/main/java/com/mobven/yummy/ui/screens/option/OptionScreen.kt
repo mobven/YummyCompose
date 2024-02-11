@@ -48,6 +48,7 @@ import com.mobven.designsystem.theme.mainPrimary
 import com.mobven.designsystem.theme.neutralGrayscale100
 import com.mobven.designsystem.theme.neutralGrayscale50
 import com.mobven.designsystem.theme.neutralGrayscale70
+import com.mobven.designsystem.theme.neutralGrayscale90
 import com.mobven.designsystem.util.yummyPadding
 import com.mobven.yummy.R
 
@@ -365,7 +366,8 @@ fun OptionScreenPreview() {
                     },
                     leadingIcon = {
                         YummyIcon(
-                            painterRes = com.mobven.components.R.drawable.ic_arrow_left
+                            painterRes = com.mobven.components.R.drawable.ic_arrow_left_with_frame,
+                            tint = MaterialTheme.colorScheme.neutralGrayscale90
                         )
                     },
                     modifier = Modifier

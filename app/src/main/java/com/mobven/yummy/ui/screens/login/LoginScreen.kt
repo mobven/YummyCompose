@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.imePadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
@@ -42,6 +43,7 @@ import com.mobven.designsystem.theme.h5BoldStyle
 import com.mobven.designsystem.theme.h5MediumStyle
 import com.mobven.designsystem.theme.h5SemiBoldStyle
 import com.mobven.designsystem.theme.neutralGrayscale100
+import com.mobven.designsystem.theme.neutralGrayscale90
 import com.mobven.designsystem.theme.promoOrange
 
 @Composable
@@ -73,8 +75,9 @@ fun LoginScreen(
             },
             leadingIcon = {
                 YummyIcon(
-                    painterRes = R.drawable.ic_arrow_left,
-                    modifier = Modifier.clickable(onClick = onBackClick)
+                    painterRes = R.drawable.ic_arrow_left_with_frame,
+                    modifier = Modifier.clickable(onClick = onBackClick),
+                    tint = MaterialTheme.colorScheme.neutralGrayscale90
                 )
             },
             modifier = Modifier.fillMaxWidth()

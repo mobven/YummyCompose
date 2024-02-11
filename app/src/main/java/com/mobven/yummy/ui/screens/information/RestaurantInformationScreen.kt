@@ -32,6 +32,7 @@ import com.mobven.designsystem.theme.grayscale200
 import com.mobven.designsystem.theme.h2BoldStyle
 import com.mobven.designsystem.theme.h3BoldStyle
 import com.mobven.designsystem.theme.neutralGrayscale100
+import com.mobven.designsystem.theme.neutralGrayscale90
 
 @Composable
 fun RestaurantInformationScreen(
@@ -51,8 +52,9 @@ fun RestaurantInformationScreen(
             },
             leadingIcon = {
                 YummyIcon(
-                    painterRes = R.drawable.ic_arrow_left,
-                    modifier = Modifier.clickable(onClick = onBackClick)
+                    painterRes = R.drawable.ic_arrow_left_with_frame,
+                    modifier = Modifier.clickable(onClick = onBackClick),
+                    tint = MaterialTheme.colorScheme.neutralGrayscale90
                 )
             },
             modifier = Modifier.fillMaxWidth()

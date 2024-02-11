@@ -157,7 +157,7 @@ fun YummyToolbarPreview() {
         },
         leadingIcon = {
             YummyIcon(
-                painterRes = R.drawable.ic_arrow_left,
+                painterRes = R.drawable.ic_arrow_left_with_frame,
                 modifier = Modifier
             )
         },
