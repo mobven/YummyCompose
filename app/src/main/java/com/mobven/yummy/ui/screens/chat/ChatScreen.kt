@@ -14,7 +14,9 @@ import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.foundation.lazy.itemsIndexed
+import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -24,6 +26,8 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -49,6 +53,8 @@ import com.mobven.designsystem.theme.mainPrimary
 import com.mobven.designsystem.theme.neutralGrayscale100
 import com.mobven.designsystem.theme.neutralGrayscale90
 import com.mobven.yummy.R
+import com.mobven.yummy.ui.theme.YummyComposeTheme
+import kotlinx.coroutines.launch
 
 @Composable
 fun ChatScreen() {
@@ -57,78 +63,89 @@ fun ChatScreen() {
         mutableStateListOf<String>()
     }
 
+    val lazyListState = rememberLazyListState()
+    val scope = rememberCoroutineScope()
+
     Column(
         modifier = Modifier.background(MaterialTheme.colorScheme.background)
     ) {
-        Header()
-        Body(messages)
-        Footer {
-            messages.add(it)
-        }
+        Header(
+            title = "Message"
+        )
+        Body(
+            messages = messages, lazyListState = lazyListState
+        )
+        Footer(onSendClicked = { message ->
+            messages.add(message)
+            scope.launch {
+                lazyListState.animateScrollToItem(messages.lastIndex)
+            }
+        })
     }
 }
 
 @Composable
-private fun Header() {
-    YummyToolbar(
-        title = {
-            Text(
-                text = "Message",
-                style = MaterialTheme.typography.h2BoldStyle
-                    .copy(color = MaterialTheme.colorScheme.neutralGrayscale100)
-            )
-        },
-        modifier = Modifier.fillMaxWidth(),
-        leadingIcon = {
-            YummyIcon(
-                painterRes = com.mobven.components.R.drawable.ic_arrow_left_with_frame,
-                tint = MaterialTheme.colorScheme.neutralGrayscale90
-            )
-        },
-        trailingIcon = {
-            YummyIcon(
-                painterRes = com.mobven.components.R.drawable.ic_call
-            )
-        }
-    )
+private fun Header(
+    title: String
+) {
+    YummyToolbar(modifier = Modifier.fillMaxWidth(), title = {
+        Text(text = title, style = with(MaterialTheme) {
+            typography.h2BoldStyle.copy(color = colorScheme.neutralGrayscale100)
+        })
+    }, leadingIcon = {
+        YummyIcon(
+            painterRes = com.mobven.components.R.drawable.ic_arrow_left_with_frame,
+            tint = MaterialTheme.colorScheme.neutralGrayscale90
+        )
+    }, trailingIcon = {
+        YummyIcon(
+            painterRes = com.mobven.components.R.drawable.ic_call
+        )
+    })
 }
 
 @OptIn(ExperimentalLayoutApi::class)
 @Composable
 private fun ColumnScope.Body(
-    messages: List<String>
+    messages: List<String>, lazyListState: LazyListState
 ) {
     LazyColumn(
-        contentPadding = PaddingValues(top = 24.dp, start = 24.dp, end = 24.dp),
+        contentPadding = PaddingValues(24.dp),
         verticalArrangement = Arrangement.spacedBy(24.dp),
+        state = lazyListState,
         modifier = Modifier
             .weight(1f)
             .imeNestedScroll()
     ) {
         itemsIndexed(messages) { index, message ->
-            MessageItem(message, index % 2 == 0)
+            MessageItem(
+                message = message,
+                isIncomingMessage = index % 2 == 0,
+                modifier = Modifier.fillMaxWidth()
+            )
         }
     }
 }
 
 @Composable
 fun MessageItem(
-    message: String,
-    isIncomingMessage: Boolean
+    message: String, isIncomingMessage: Boolean, modifier: Modifier = Modifier
 ) {
     CompositionLocalProvider(
-        LocalLayoutDirection provides if (isIncomingMessage) LayoutDirection.Ltr else LayoutDirection.Rtl
+        LocalLayoutDirection provides if (isIncomingMessage) {
+            LayoutDirection.Ltr
+        } else {
+            LayoutDirection.Rtl
+        }
     ) {
-        Column {
-            Row(
-                modifier = Modifier.fillMaxWidth()
-            ) {
+        Column(modifier = modifier) {
+            Row {
                 YummyImage(
                     imgResId = R.drawable.planet,
+                    contentScale = ContentScale.Crop,
                     modifier = Modifier
                         .size(38.dp)
                         .align(Alignment.Bottom),
-                    contentScale = ContentScale.Crop
                 )
 
                 HorizontalSpacer(width = 8.dp)
@@ -172,7 +189,7 @@ private fun Footer(
     onSendClicked: (String) -> Unit
 ) {
 
-    var message by remember {
+    var message by rememberSaveable {
         mutableStateOf("")
     }
 
@@ -215,5 +232,7 @@ private fun Footer(
 @Preview
 @Composable
 fun ChatScreenPreview() {
-    ChatScreen()
+    YummyComposeTheme {
+        ChatScreen()
+    }
 }

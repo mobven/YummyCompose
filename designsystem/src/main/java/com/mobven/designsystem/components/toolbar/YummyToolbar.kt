@@ -41,13 +41,12 @@ fun YummyToolbar(
         modifier = modifier
             .shadow(
                 elevation,
-                spotColor = MaterialTheme
-                    .colorScheme
-                    .additionalDark.copy(alpha = 0.7f)
+                spotColor = MaterialTheme.colorScheme.additionalDark.copy(alpha = 0.7f)
             )
             .background(backgroundColor)
             .yummyPadding(top = 45.dp, bottom = 12.dp, horizontal = 24.dp),
         content = {
+
             if (leadingIcon != null) {
                 Row(
                     content = leadingIcon,
@@ -56,7 +55,8 @@ fun YummyToolbar(
             }
 
             Row(
-                content = title, modifier = Modifier.layoutId(YummyToolbarItems.TITLE)
+                content = title,
+                modifier = Modifier.layoutId(YummyToolbarItems.TITLE)
             )
 
             if (trailingIcon != null) {
@@ -67,7 +67,6 @@ fun YummyToolbar(
             }
         }
     )
-
 }
 
 @Composable
@@ -76,7 +75,6 @@ fun rememberYummyToolbarLayoutMeasurePolicy(): MeasurePolicy {
         MeasurePolicy { measurables, constraints ->
             var hasLeadingIcon = false
             var hasTrailingIcon = false
-
 
 
             val placeables =
@@ -124,12 +122,20 @@ fun rememberYummyToolbarLayoutMeasurePolicy(): MeasurePolicy {
                         }
 
                         YummyToolbarItems.LEADING_ICON -> {
-                            pair.second.placeRelative(0, 0)
+                            pair.second.apply {
+                                placeRelative(
+                                    x = 0,
+                                    y = ((maxHeight / 2f) - (height / 2f)).toInt()
+                                )
+                            }
                         }
 
                         YummyToolbarItems.TRAILING_ICON -> {
                             pair.second.apply {
-                                placeRelative(constraints.maxWidth - measuredWidth, 0)
+                                placeRelative(
+                                    x = constraints.maxWidth - measuredWidth,
+                                    y = ((maxHeight / 2f) - (height / 2f)).toInt()
+                                )
                             }
                         }
                     }
@@ -158,6 +164,12 @@ fun YummyToolbarPreview() {
         leadingIcon = {
             YummyIcon(
                 painterRes = R.drawable.ic_arrow_left_with_frame,
+                modifier = Modifier
+            )
+        },
+        trailingIcon = {
+            YummyIcon(
+                painterRes = R.drawable.ic_call,
                 modifier = Modifier
             )
         },

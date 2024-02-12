@@ -19,7 +19,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Brush
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.SolidColor
 import androidx.compose.ui.text.TextLayoutResult
 import androidx.compose.ui.text.TextStyle
@@ -48,7 +47,7 @@ fun ChatInput(
     visualTransformation: VisualTransformation = VisualTransformation.None,
     onTextLayout: (TextLayoutResult) -> Unit = {},
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
-    cursorBrush: Brush = SolidColor(Color.Black)
+    cursorBrush: Brush = SolidColor(MaterialTheme.colorScheme.mainPrimary)
 ) {
     BasicTextField(
         value = value,
@@ -76,11 +75,14 @@ fun ChatInput(
                     .padding(horizontal = 12.dp)
 
             ) {
+
                 Box(
-                    modifier = Modifier.weight(1f)
-                ) {
-                    decoration()
-                }
+                    modifier = Modifier.weight(1f),
+                    content = {
+                        decoration()
+                    }
+                )
+
                 YummyIcon(
                     painterRes = R.drawable.ic_send,
                     tint = MaterialTheme.colorScheme.mainPrimary,
@@ -96,5 +98,9 @@ fun ChatInput(
 @Preview(showBackground = true)
 @Composable
 fun ChatInputPreview() {
-    ChatInput(value = "", onValueChange = {}, modifier = Modifier.fillMaxWidth(), onSendClicked = {})
+    ChatInput(
+        value = "",
+        onValueChange = {},
+        modifier = Modifier.fillMaxWidth(),
+        onSendClicked = {})
 }
