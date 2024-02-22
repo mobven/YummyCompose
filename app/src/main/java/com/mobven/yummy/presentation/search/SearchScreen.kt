@@ -32,6 +32,7 @@ import com.mobven.designsystem.theme.h4SemiBoldStyle
 import com.mobven.designsystem.theme.h5NormalStyle
 import com.mobven.designsystem.theme.mainPrimary
 import com.mobven.designsystem.theme.neutralGrayscale80
+import com.mobven.designsystem.theme.neutralGrayscale90
 import com.mobven.yummy.R
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -65,8 +66,8 @@ fun SearchScreen(
                 },
                 navigationIcon = {
                     YummyIcon(
-                        painterRes = R.drawable.ic_arrow_left,
-                        tint = Color(0xFF434E58),
+                        painterRes = com.mobven.components.R.drawable.ic_arrow_left,
+                        tint = MaterialTheme.colorScheme.neutralGrayscale90,
                         modifier = Modifier.padding(start = 20.dp, top = 28.dp)
                     )
                 }

@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.imePadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
@@ -27,6 +28,7 @@ import com.mobven.components.R
 import com.mobven.designsystem.components.buttons.SocialMediaButton
 import com.mobven.designsystem.components.buttons.YummyButton
 import com.mobven.designsystem.components.common.VerticalSpacer
+import com.mobven.designsystem.components.common.YummyIcon
 import com.mobven.designsystem.components.inputs.PasswordInputField
 import com.mobven.designsystem.components.inputs.PhoneNumberField
 import com.mobven.designsystem.components.toolbar.YummyToolbar
@@ -34,12 +36,14 @@ import com.mobven.designsystem.theme.additionalDark
 import com.mobven.designsystem.theme.additionalWhite
 import com.mobven.designsystem.theme.grayscale200
 import com.mobven.designsystem.theme.grayscale600
+import com.mobven.designsystem.theme.h2BoldStyle
 import com.mobven.designsystem.theme.h4BoldStyle
 import com.mobven.designsystem.theme.h4MediumStyle
 import com.mobven.designsystem.theme.h5BoldStyle
 import com.mobven.designsystem.theme.h5MediumStyle
 import com.mobven.designsystem.theme.h5SemiBoldStyle
 import com.mobven.designsystem.theme.neutralGrayscale100
+import com.mobven.designsystem.theme.neutralGrayscale90
 import com.mobven.designsystem.theme.promoOrange
 
 @Composable
@@ -63,9 +67,19 @@ fun LoginScreen(
     ) {
 
         YummyToolbar(
-            title = "Sign in",
-            icon = R.drawable.ic_arrow_left,
-            onIconClick = onBackClick,
+            title = {
+                Text(
+                    text = "Sign in", style = MaterialTheme.typography.h2BoldStyle
+                        .copy(color = MaterialTheme.colorScheme.neutralGrayscale100)
+                )
+            },
+            leadingIcon = {
+                YummyIcon(
+                    painterRes = R.drawable.ic_arrow_left_with_frame,
+                    modifier = Modifier.clickable(onClick = onBackClick),
+                    tint = MaterialTheme.colorScheme.neutralGrayscale90
+                )
+            },
             modifier = Modifier.fillMaxWidth()
         )
 

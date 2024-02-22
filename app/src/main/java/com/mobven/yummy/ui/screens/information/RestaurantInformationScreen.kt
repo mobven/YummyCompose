@@ -1,6 +1,7 @@
 package com.mobven.yummy.ui.screens.information
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -20,6 +21,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.mobven.components.R
 import com.mobven.designsystem.components.common.VerticalSpacer
+import com.mobven.designsystem.components.common.YummyIcon
 import com.mobven.designsystem.components.common.YummyImage
 import com.mobven.designsystem.components.text.KeyValueText
 import com.mobven.designsystem.components.text.ReadMoreClickableText
@@ -27,8 +29,10 @@ import com.mobven.designsystem.components.text.TextWithIcon
 import com.mobven.designsystem.components.toolbar.YummyToolbar
 import com.mobven.designsystem.theme.additionalWhite
 import com.mobven.designsystem.theme.grayscale200
+import com.mobven.designsystem.theme.h2BoldStyle
 import com.mobven.designsystem.theme.h3BoldStyle
 import com.mobven.designsystem.theme.neutralGrayscale100
+import com.mobven.designsystem.theme.neutralGrayscale90
 
 @Composable
 fun RestaurantInformationScreen(
@@ -42,9 +46,17 @@ fun RestaurantInformationScreen(
     ) {
 
         YummyToolbar(
-            title = "Restaurant Information",
-            icon = R.drawable.ic_arrow_left,
-            onIconClick = onBackClick,
+            title = {
+                    Text(text = "Restaurant Information", style = MaterialTheme.typography.h2BoldStyle
+                        .copy(color = MaterialTheme.colorScheme.neutralGrayscale100))
+            },
+            leadingIcon = {
+                YummyIcon(
+                    painterRes = R.drawable.ic_arrow_left_with_frame,
+                    modifier = Modifier.clickable(onClick = onBackClick),
+                    tint = MaterialTheme.colorScheme.neutralGrayscale90
+                )
+            },
             modifier = Modifier.fillMaxWidth()
         )
 

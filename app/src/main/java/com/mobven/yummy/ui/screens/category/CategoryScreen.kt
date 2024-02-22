@@ -1,6 +1,7 @@
 package com.mobven.yummy.ui.screens.category
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -9,6 +10,7 @@ import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.itemsIndexed
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
@@ -16,8 +18,12 @@ import androidx.compose.ui.unit.dp
 import com.mobven.components.R
 import com.mobven.designsystem.components.common.CategoryCard
 import com.mobven.designsystem.components.common.VerticalSpacer
+import com.mobven.designsystem.components.common.YummyIcon
 import com.mobven.designsystem.components.toolbar.YummyToolbar
 import com.mobven.designsystem.theme.additionalWhite
+import com.mobven.designsystem.theme.h2BoldStyle
+import com.mobven.designsystem.theme.neutralGrayscale100
+import com.mobven.designsystem.theme.neutralGrayscale90
 
 @Composable
 fun CategoryScreen(
@@ -43,9 +49,19 @@ fun CategoryScreen(
             .background(MaterialTheme.colorScheme.additionalWhite)
     ) {
         YummyToolbar(
-            title = "Category",
-            icon = R.drawable.ic_arrow_left,
-            onIconClick = onBackClick,
+            title = {
+                Text(
+                    text = "Category", style = MaterialTheme.typography.h2BoldStyle
+                        .copy(color = MaterialTheme.colorScheme.neutralGrayscale100)
+                )
+            },
+            leadingIcon = {
+                YummyIcon(
+                    painterRes = R.drawable.ic_arrow_left_with_frame,
+                    modifier = Modifier.clickable(onClick = onBackClick),
+                    tint = MaterialTheme.colorScheme.neutralGrayscale90
+                )
+            },
             modifier = Modifier.fillMaxWidth()
         )
         VerticalSpacer(height = 24.dp)

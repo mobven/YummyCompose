@@ -160,6 +160,15 @@ val Typography.h5NormalStyle: TextStyle
         platformStyle = PlatformTextStyle(includeFontPadding = false)
     )
 
+val Typography.caption: TextStyle
+    get() = TextStyle(
+        fontFamily = sfProFamily,
+        fontSize = 11.sp,
+        lineHeight = 16.sp,
+        fontWeight = FontWeight.Normal,
+        platformStyle = PlatformTextStyle(includeFontPadding = false)
+    )
+
 val Typography.smallBoldStyle: TextStyle
     get() = TextStyle(
         fontFamily = sfProFamily,

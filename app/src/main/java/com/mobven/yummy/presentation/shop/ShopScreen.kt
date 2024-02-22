@@ -141,7 +141,7 @@ private fun TopBanner(
                     backPressed.invoke()
                 }
             ) {
-                YummyIcon(painterRes = R.drawable.ic_arrow_left)
+                YummyIcon(painterRes = com.mobven.components.R.drawable.ic_arrow_left)
             }
 
             YummyAsyncImage(

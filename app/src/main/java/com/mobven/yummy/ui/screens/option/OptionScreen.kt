@@ -16,6 +16,7 @@ import androidx.compose.material3.Divider
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
@@ -32,6 +33,7 @@ import com.mobven.designsystem.components.buttons.CounterButton
 import com.mobven.designsystem.components.buttons.CounterButtonType
 import com.mobven.designsystem.components.buttons.YummyButton
 import com.mobven.designsystem.components.chip.LazyRowYummyCircleChip
+import com.mobven.designsystem.components.common.YummyIcon
 import com.mobven.designsystem.components.common.YummyImage
 import com.mobven.designsystem.components.inputs.MultilineInputFiled
 import com.mobven.designsystem.components.text.ReadMoreClickableText
@@ -40,8 +42,10 @@ import com.mobven.designsystem.components.text.YummyHead3SemiBoldText
 import com.mobven.designsystem.components.text.YummyHead4MediumText
 import com.mobven.designsystem.components.text.YummyHead4SemiBoldText
 import com.mobven.designsystem.components.toolbar.YummyToolbar
+import com.mobven.designsystem.theme.h2BoldStyle
 import com.mobven.designsystem.theme.h4MediumStyle
 import com.mobven.designsystem.theme.mainPrimary
+import com.mobven.designsystem.theme.neutralGrayscale100
 import com.mobven.designsystem.theme.neutralGrayscale50
 import com.mobven.designsystem.theme.neutralGrayscale70
 import com.mobven.designsystem.theme.neutralGrayscale90
@@ -354,14 +358,21 @@ fun OptionScreenPreview() {
         Scaffold(
             topBar = {
                 YummyToolbar(
-                    title = "Option",
-                    icon = R.drawable.ic_arrow_left,
-                    iconTint = MaterialTheme.colorScheme.neutralGrayscale90,
+                    title = {
+                        Text(
+                            text = "Option", style = MaterialTheme.typography.h2BoldStyle
+                                .copy(color = MaterialTheme.colorScheme.neutralGrayscale100)
+                        )
+                    },
+                    leadingIcon = {
+                        YummyIcon(
+                            painterRes = com.mobven.components.R.drawable.ic_arrow_left_with_frame,
+                            tint = MaterialTheme.colorScheme.neutralGrayscale90
+                        )
+                    },
                     modifier = Modifier
                         .fillMaxWidth()
-                ) {
-
-                }
+                )
             }
         ) {
             Box(
