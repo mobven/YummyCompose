@@ -27,6 +27,7 @@ import com.mobven.designsystem.theme.h5NormalStyle
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun SearchBar(
+    modifier: Modifier = Modifier,
     text: String,
     onTextChange: (String) -> Unit,
     hint: String,
