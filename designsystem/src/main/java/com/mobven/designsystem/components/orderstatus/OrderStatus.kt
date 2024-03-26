@@ -79,18 +79,19 @@ fun OrderStatus(
         Text(
             text = "Status",
             style = MaterialTheme.typography.h2SemiBoldStyle,
-            modifier = modifier.padding(start = 7.dp)
+            modifier = modifier.padding(top = 24.dp, start = 24.dp, end = 24.dp)
         )
         VerticalSpacer(height = 15.dp)
         Text(
             text = currentStep.statusText,
             style = MaterialTheme.typography.h5MediumStyle,
-            modifier = modifier.padding(start = 7.dp)
+            modifier = modifier.padding(horizontal = 24.dp)
         )
         VerticalSpacer(height = 15.dp)
         LazyRow(
             modifier = modifier
-                .fillMaxWidth(),
+                .fillMaxWidth()
+                .padding(horizontal = 24.dp),
             horizontalArrangement = Arrangement.SpaceAround,
             verticalAlignment = Alignment.CenterVertically
         ) {
@@ -104,10 +105,10 @@ fun OrderStatus(
             }
 
         }
-        TextButton(onClick = { /*TODO*/ }) {
+        TextButton(onClick = { /*TODO*/ },  modifier= Modifier.padding(horizontal = 15.dp)) {
             Row {
-                Text(text = "Follow the order", color = AdditionalDark, modifier= Modifier.padding(end = 10.dp), style = MaterialTheme.typography.h4SemiBoldStyle)
-                YummyIcon(painterRes = R.drawable.ic_arrow_order, tint = AdditionalDark, modifier = Modifier.padding(top = 3.3.dp))
+                Text(text = "Follow the order", color = AdditionalDark, style = MaterialTheme.typography.h4SemiBoldStyle)
+                YummyIcon(painterRes = R.drawable.ic_arrow_order, tint = AdditionalDark, modifier = Modifier.padding(top = 3.3.dp, start = 7.dp))
             }
         }
     }
